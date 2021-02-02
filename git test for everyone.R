@@ -65,3 +65,12 @@ morgan_plot
 benny_run <- unbiased_transmission_2(N = 500, t_max = 100, r_max = 25)
 benny_plot <- plot_multiple_runs(benny_run)
 benny_plot
+
+#look ma I did it!
+claire_run <- unbiased_transmission_2(N = 1000, t_max = 500, r_max = 30)
+claire_plot <- plot_multiple_runs(claire_run)
+claire_plot 
+
+claire_run2 <- unbiased_transmission_2(N = 1000, t_max = 500, r_max = 5)
+claire_plot2 <- plot_multiple_runs(claire_run2)
+claire_plot2 
