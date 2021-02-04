@@ -55,6 +55,8 @@ plot_multiple_runs <- function(data_model) {
     labs(y = "p (proportion of individuals with trait A)")
 }
 
+#####################################################################################
+
 ### everyone add a different version with different N, t_max with 10 runs and plot it
 
 morgan_run <- unbiased_transmission_2(N = 100, t_max = 200, r_max = 10)
