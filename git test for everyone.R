@@ -74,3 +74,7 @@ claire_plot
 claire_run2 <- unbiased_transmission_2(N = 1000, t_max = 500, r_max = 5)
 claire_plot2 <- plot_multiple_runs(claire_run2)
 claire_plot2 
+
+### group plot
+group_plot <- morgan_plot + benny_plot + claire_plot + claire_plot2
+group_plot
