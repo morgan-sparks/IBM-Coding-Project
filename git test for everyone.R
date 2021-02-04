@@ -58,22 +58,26 @@ plot_multiple_runs <- function(data_model) {
 ### everyone add a different version with different N, t_max with 10 runs and plot it
 
 morgan_run <- unbiased_transmission_2(N = 100, t_max = 200, r_max = 10)
-morgan_plot <- plot_multiple_runs(morgan_run)
+morgan_plot <- plot_multiple_runs(morgan_run) + ggtitle("N = 100, t_max = 200, r_max = 10")
 morgan_plot
 
 ### add your own below
 benny_run <- unbiased_transmission_2(N = 500, t_max = 100, r_max = 25)
-benny_plot <- plot_multiple_runs(benny_run)
-benny_plot
+benny_plot <- plot_multiple_runs(benny_run) + ggtitle("N = 500, t_max = 100, r_max = 25")
+benny_plot 
 
 #look ma I did it!
 claire_run <- unbiased_transmission_2(N = 1000, t_max = 500, r_max = 30)
-claire_plot <- plot_multiple_runs(claire_run)
+claire_plot <- plot_multiple_runs(claire_run) + ggtitle("N = 1000, t_max = 500, r_max = 30")
 claire_plot 
 
 claire_run2 <- unbiased_transmission_2(N = 1000, t_max = 500, r_max = 5)
-claire_plot2 <- plot_multiple_runs(claire_run2)
+claire_plot2 <- plot_multiple_runs(claire_run2) + ggtitle("N = 1000, t_max = 500, r_max = 5")
 claire_plot2 
+
+### spot for ryan
+
+
 
 ### group plot
 group_plot <- morgan_plot + benny_plot + claire_plot + claire_plot2
