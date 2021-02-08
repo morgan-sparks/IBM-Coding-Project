@@ -7,6 +7,7 @@ This will pair with theory about how to maximize dispersal, as well as bet hedgi
 
 # Book we're working through
 Individual-based models of cultural evolution: A step-by-step guide using R
+
 https://acerbialberto.com/IBM-cultevo/
 
 # Other IBM tutorial
