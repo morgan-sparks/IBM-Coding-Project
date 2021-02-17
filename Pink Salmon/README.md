@@ -35,10 +35,10 @@ differ among sites but are similar among years and (5) when
 meta-populations are young and populations are characterised
 by fast growth (see Levin et al. 1984; Cohen & Levin 1991;
 Wiener & Tuljapurkar 1994; McPeek & Kalisz 1998; Olivieri
-2001).
+2001).*
 
 
-In contrast, **temporal dispersal** is favoured over spatial dispersal
+*In contrast, **temporal dispersal** is favoured over spatial dispersal
 (1) in small meta-populations, (2), when fitness failures
 are likely to occur simultaneously in all patches of a
 meta-population, (3) when the cost of spatial dispersal is high
