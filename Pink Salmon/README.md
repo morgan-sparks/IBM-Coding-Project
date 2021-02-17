@@ -22,7 +22,6 @@ Frequency dependence (fish more likely to be one trait if there are few indvidua
 # Hypotheses: 
 From Buoro and Carlson 2014 
 
-# Hypotheses:
 *Overall, these studies have found that spatial
 dispersal is favoured over temporal dispersal when (1) the environment
 *Overall, these studies have found that **spatial
