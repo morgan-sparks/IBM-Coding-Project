@@ -22,10 +22,9 @@ Frequency dependence (fish more likely to be one trait if there are few indvidua
 # Hypotheses: 
 From Buoro and Carlson 2014 
 
-<<<<<<< HEAD
+# Hypotheses:
 *Overall, these studies have found that spatial
 dispersal is favoured over temporal dispersal when (1) the environment
-=======
 *Overall, these studies have found that **spatial
 dispersal** is favoured over temporal dispersal when (1) the environment
 is only occasionally favourable, (2) the number of
@@ -36,7 +35,6 @@ meta-populations are young and populations are characterised
 by fast growth (see Levin et al. 1984; Cohen & Levin 1991;
 Wiener & Tuljapurkar 1994; McPeek & Kalisz 1998; Olivieri
 2001).*
-
 
 *In contrast, **temporal dispersal** is favoured over spatial dispersal
 (1) in small meta-populations, (2), when fitness failures
