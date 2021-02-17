@@ -78,7 +78,9 @@ claire_plot2 <- plot_multiple_runs(claire_run2) + ggtitle("N = 1000, t_max = 500
 claire_plot2 
 
 ### spot for ryan
-
+rl_run <- unbiased_transmission_2(N = 1000, t_max = 200, r_max = 30)
+rl_plot <- plot_multiple_runs(rl_run) + ggtitle("N = 1000, t_max = 500, r_max = 30")
+rl_plot
 
 
 ### group plot
