@@ -6,6 +6,8 @@ Carrying capacity = 5000 (build it to be variable if you like)
 
 Population growth = 1.2 (doesn't need to be exact, will be fun to see how we all build this)
 
+Generations = 100
+
 For funsies -> emigration = 0.1
 
 Other things to keep in mind:
