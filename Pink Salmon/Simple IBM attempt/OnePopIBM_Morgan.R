@@ -96,10 +96,14 @@ for (i in gens){
 census_summary <-data.frame(census_summary)
 
 
-ggplot(data = census_summary[1:99,]) +
-  geom_line(aes(x = year, y = n), color = "dodgerblue", size =1) +
-  geom_line(aes(x =year, y = ems), color = "orange", size =1 ) +
+p1 <- ggplot(data = census_summary[1:99,]) +
+  geom_line(aes(x = year, y = n, color = "Current River"), size =1) +
+  geom_line(aes(x =year, y = ems, color = "Strays"), size =1 ) +
   geom_hline(yintercept = 5000, linetype = "dashed" ) +
+  scale_color_manual(name = "Population", 
+                     values = c("Current River" = "dodgerblue", "Strays" = "orange")) +
   labs( x ="Generations", y = "Population size") +
-  theme_classic()
+  theme_classic(base_size = 14) +
+  theme(legend.position = c(0.75, 0.5)) 
 
+ggsave("~/IBM-Coding-Project/Pink Salmon/Simple IBM attempt/MorganIBM.pdf", plot = p1)
