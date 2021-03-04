@@ -86,6 +86,8 @@ for(j in gens){
   current_river <- data.frame(fish = 1:sum(current_river[,4]), year = j, emigrate = 0, birth = 0, death = 0)
   
 }
+
+#------- make data in format ggplot likes
 census_summary <- NULL
 for (i in gens){
   pop <- census[census[,2] == i, ]
@@ -95,7 +97,7 @@ for (i in gens){
 }
 census_summary <-data.frame(census_summary)
 
-
+#plot
 p1 <- ggplot(data = census_summary[1:99,]) +
   geom_line(aes(x = year, y = n, color = "Current River"), size =1) +
   geom_line(aes(x =year, y = ems, color = "Strays"), size =1 ) +
