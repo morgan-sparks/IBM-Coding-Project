@@ -6,7 +6,7 @@
 # until carrying capacity 5000, with births, deaths, and emigration (maybe)
 
 #####################################################################################
-
+library(ggplot2)
 #------- initialize population
 
 current_river <- data.frame(fish = 1:100, year = 1, emigrate = 0, birth = 0, death = 0)
@@ -35,7 +35,7 @@ density_dependence <- function(current_river){
   
   if(pop_size > k){
     number_to_kill <-pop_size - k # get number of individuals to kill
-    individuals_to_kill <- order(sample(1:pop_size, size = number_to_kill, replace = FALSE))
+    individuals_to_kill <- sample(1:pop_size, size = number_to_kill, replace = FALSE)
     
     # kill individuals in current river that match those in individuals to kill
     current_river[individuals_to_kill,5]  <- 1
@@ -46,66 +46,60 @@ density_dependence <- function(current_river){
 #------- birth function
 
 make_baby <- function(current_river){
-  if(current_river[,5] == 0){
   for(i in 1:nrow(current_river)){
-    #only do individuals that dies
-    if(current_river[,5] == 0)
+    #only do individuals that haven't died
+    if(current_river[i,5] == 0){
     current_river[i,4] <- sample(birth_draw, size = 1, replace = TRUE)
-  }
     }
-  return(current_river)
   }
+  return(current_river)
+}
+
 
 
 #####################################################################################
 # execute the ibm
 
 
-#------- run for 50 gens
+#------- run for 100 gens
 current_river <- data.frame(fish = 1:100, year = 1, emigrate = 0, birth = 0, death = 0)
-gens <- seq(from = 3, to = 101, by = 2)
+gens <- seq(from = 3, to = 201, by = 2)
 emigrants <- NULL
 census <- current_river
 
 for(j in gens){
   #------- emigration
  
-  emigrate(current_river)
-  emigrants <- rbind(emigrants, current_river[current_river[,5]==1,]) # add emigrants to emigrant dataframe
-  current_river <- current_river[current_river[,5]==0,] #drop individuals tha emigrated
+  current_river <- emigrate(current_river)
+  emigrants <- rbind(emigrants, current_river[current_river[,3]==1,]) # add emigrants to emigrant dataframe
+  current_river <- current_river[current_river[,3]==0,] #drop individuals tha emigrated
   
   #------- density dependence
-  density_dependence(current_river)
+  current_river <- density_dependence(current_river)
   
   #------ births
-  make_baby(current_river)
+  current_river <- make_baby(current_river)
   
   #------ add individuals to census, add babies to next gen, add gen
-  census <- rbind(census)
-  #remake dataframe of current river baed on sum of births in birth column
+  census <- rbind(census, current_river)
+  #remake current river based on sum of births 
   current_river <- data.frame(fish = 1:sum(current_river[,4]), year = j, emigrate = 0, birth = 0, death = 0)
   
-  j <- j +2
-  
 }
+census_summary <- NULL
+for (i in gens){
+  pop <- census[census[,2] == i, ]
+  ems <- emigrants[emigrants[,2]==i, ]
+  pop.size <- c(year = i, n = nrow(pop), ems = nrow(ems))
+  census_summary <- rbind(census_summary, pop.size)
+}
+census_summary <-data.frame(census_summary)
 
 
-emigrate(current_river)
-emigrants <- rbind(emigrants, current_river[current_river[,3]==1,]) # add emigrants to emigrant dataframe
-current_river <- current_river[current_river[,3]==0,] #drop individuals tha emigrated
-
-#------- density dependence
-density_dependence(current_river)
-
-#------ births
-make_baby(current_river)
-
-#------ add individuals to census, add babies to next gen, add gen
-census <- rbind(census)
-current_river <- data.frame(fish = 1:sum(current_river[,4]), year = j, emigrate = 0, birth = 0, death = 0)
-
-
-
-
-
+ggplot(data = census_summary[1:99,]) +
+  geom_line(aes(x = year, y = n), color = "dodgerblue", size =1) +
+  geom_line(aes(x =year, y = ems), color = "orange", size =1 ) +
+  geom_hline(yintercept = 5000, linetype = "dashed" ) +
+  labs( x ="Generations", y = "Population size") +
+  theme_classic()
 
