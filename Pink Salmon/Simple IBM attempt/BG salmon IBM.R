@@ -1,5 +1,5 @@
 ##################################################
-#Last edited by B. Goller on 08 March 2021
+#Last edited by B. Goller on 10 March 2021
 #Set up simple salmon IBM
 ##################################################
 #Get the required packages
@@ -40,6 +40,15 @@ fatten.fish <- function(pop, mean, sd){
   return(masses)
 }
 ##################################################
+#enforce mortality by carrying capacity
+k.mortality <- function(pop, k.lim){
+  #ifelse(nrow(pop) > k.lim, survivors <- sample(c(1:nrow(pop)), k.lim, replace = FALSE), survivors <- c(1:nrow(pop)))
+  #or could have a survivor sampling method that uses mass to increase likelihood of survival
+  ifelse(nrow(pop) > k.lim, survivors <- sample(c(1:nrow(pop)), k.lim, prob = pop$mass, replace = FALSE), survivors <- c(1:nrow(pop)))
+  
+  return(survivors)
+}
+##################################################
 ##################################################
 #Model a population
 #start with 100 fish
@@ -61,11 +70,17 @@ salmon.df.init$num.f1 <- reproduction(salmon.df.init, p.repro, gen.growth)
 salmon.gens <- NULL
 salmon.gens[[1]] <- salmon.df.init
 salmon.curr.gen <- salmon.df.init
-for(g in 2:10){
+salmon.abund <- matrix(NA, 100, 3)
+salmon.abund[1,] <- c(1, nrow(salmon.df.init), mean(salmon.df.init$mass))
+for(g in 2:100){
   salmon.curr.gen <- nextgen.fish(salmon.curr.gen)
   salmon.curr.gen$num.f1 <- reproduction(salmon.curr.gen, p.repro, gen.growth)
+  salmon.curr.gen <- salmon.curr.gen[k.mortality(salmon.curr.gen, habitat.K),]
+  salmon.abund[g,] <- c(g, nrow(salmon.curr.gen), mean(salmon.curr.gen$mass))
   salmon.gens[[g]] <- salmon.curr.gen
 }
+plot(salmon.abund[,1], salmon.abund[,2])
+plot(salmon.abund[,1], salmon.abund[,3])
 
 salmon.gens2 <- NULL
 salmon.gens2[[1]] <- salmon.df.init
@@ -79,8 +94,8 @@ while(nrow(salmon.curr.gen)<habitat.K){
 }
 sprintf("it took %i generations to get to carrying capacity!", gen.count)
 
-salmon.abund <- matrix(NA, gen.count, 2)
+salmon.abund2 <- matrix(NA, gen.count, 2)
 for(a in 1:gen.count){
-  salmon.abund[a,] <- c(a, nrow(salmon.gens2[[a]]))
+  salmon.abund2[a,] <- c(a, nrow(salmon.gens2[[a]]))
 }
-plot(salmon.abund[,1], salmon.abund[,2])
+plot(salmon.abund2[,1], salmon.abund2[,2])
