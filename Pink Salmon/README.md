@@ -1,4 +1,14 @@
 # Ideas for Pink Salmon project
+##
+* add multiple populations
+* add 3 yr olds
+* adding compensatory growth (adult carrying capacity vs juvenile carrying capacity)
+* need to have a minimum number of fish in the population
+* add in sex 
+* genetic component
+  -column of age at maturity and column of age and when age at maturity == age they return
+  -heritability is a genetic or non-genetic component
+* 
 
 # Life history
 
