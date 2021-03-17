@@ -16,3 +16,9 @@ Other things to keep in mind:
 2. Fish are 2-year olds, not messing with 3s yet
 
 Write your script and push to this folder when done.
+
+
+------------------------
+
+3/19/21
+make a data strucure where fish go to lake and hold in lake until they age at maturity
