@@ -24,15 +24,13 @@
 * hard sweep (mutation arises in population)
 
 
-#ecological factors
+# Ecological factors
 Frequency dependence (fish more likely to be one trait if there are few indviduals)
   e.g. are fish more likely to spread risk across time if densities are low?
 
 # Hypotheses: 
 From Buoro and Carlson 2014 
 
-*Overall, these studies have found that spatial
-dispersal is favoured over temporal dispersal when (1) the environment
 *Overall, these studies have found that **spatial
 dispersal** is favoured over temporal dispersal when (1) the environment
 is only occasionally favourable, (2) the number of
