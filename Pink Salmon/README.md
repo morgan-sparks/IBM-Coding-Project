@@ -7,7 +7,8 @@
 * adding compensatory growth (adult carrying capacity vs juvenile carrying capacity)
 * need to have a minimum number of fish in the population
 * add in sex 
-* genetic component
+  1. Think about how pairing sexes will work for mating, also will there be a ratio of males to females where it is just not possible for males to mate more
+* genetic component (e.g. SNP panel of 100 SNPs or something similar)
 
 # Life history
 
