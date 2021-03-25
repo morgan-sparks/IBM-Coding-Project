@@ -23,7 +23,7 @@ lake <- NULL
 
 emigrate <-  function(current_river){
   if(is.null(current_river)==TRUE){
-    print(paste("It is year", j, ", fish are in lake"))
+    print(paste("No strays, fish are in lake"))
   } else{
     for(i in 1:nrow(current_river)) {
     current_river[i,5] <- sample(emigrate_draw, size = 1, replace = TRUE)
@@ -72,7 +72,7 @@ migrate <- function(current_river, lake){
 
 density_dependence <- function(current_river){
   if(is.null(current_river)==TRUE){
-    print(paste("It is year", j, ", fish are in lake"))
+    print(paste("No limitation on spawning, fish are in lake"))
   }else{
     if(pop_size > k){
       pop_size <- nrow(current_river) # make pop size = to length of pop
@@ -90,7 +90,7 @@ density_dependence <- function(current_river){
 
 make_baby <- function(current_river){
   if(is.null(current_river)==TRUE){
-    print(paste("It is year", j, ", fish are in lake"))
+    print(paste("No spawning, fish are in lake"))
     } else{ 
       for(i in 1:nrow(current_river)){
       #only do individuals that haven't died
@@ -115,12 +115,16 @@ birth_draw <- c(rep(1,50), rep(2,30), rep(3, 10), rep(0,10))
 
 
 #------- run for 100 gens
+#waterbodies <- list(current_river = data.frame(fish = 1:100, year = 1, age = 1, age_maturity = 2, emigrate = 0, birth = 0, death = 0),
+                    # lake = NULL)
+
 current_river <- data.frame(fish = 1:100, year = 1, age = 1, age_maturity = 2, emigrate = 0, birth = 0, death = 0)
+lake <- NULL
 gens <- c(2:200)
 emigrants <- NULL
-lake <- NULL
-waterbodies <- list(current_river = current_river,)
-census <- current_river
+
+
+census <- waterbodies$current_river
 j=1
 for(j in gens){
   #------- emigration
@@ -142,7 +146,7 @@ for(j in gens){
   census <- rbind(census, current_river, lake)
   #remake current river based on sum of births 
   if(is.null(current_river)==TRUE){
-    print("Waiting for fish to return")
+    print("No births, fish are in lake")
   } else{
   current_river <- data.frame(fish = 1:sum(current_river[,6]), year = j, age = 1, age_maturity = 2, emigrate = 0, birth = 0, death = 0)
   }
