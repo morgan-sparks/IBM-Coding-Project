@@ -63,10 +63,10 @@ migrate <- function(current_river, lake){
   # add a year of age 
   lake[,3] <- lake[,3] + 1
   
-  return(current_river)
-  return(lake)
+  #create list and return it
+  waterbodies <- list(current_river = current_river, lake = lake)
+  return(waterbodies)
 }
-
 
 #------- density dependence
 
@@ -74,9 +74,9 @@ density_dependence <- function(current_river){
   if(is.null(current_river)==TRUE){
     print(paste("No limitation on spawning, fish are in lake"))
   }else{
+    pop_size <- nrow(current_river) # make pop size = to length of pop
+    k <-round(rnorm(1, mean = 5000, sd = 250),0) # K is a random draw from normal dist w/ mean 5000 and sd 250
     if(pop_size > k){
-      pop_size <- nrow(current_river) # make pop size = to length of pop
-      k <-round(rnorm(1, mean = 5000, sd = 250),0) # K is a random draw from normal dist w/ mean 5000 and sd 250
       number_to_kill <- pop_size - k # get number of individuals to kill
       individuals_to_kill <- sample(1:pop_size, size = number_to_kill, replace = FALSE)
       # kill individuals in current river that match those in individuals to kill
@@ -115,40 +115,38 @@ birth_draw <- c(rep(1,50), rep(2,30), rep(3, 10), rep(0,10))
 
 
 #------- run for 100 gens
-#waterbodies <- list(current_river = data.frame(fish = 1:100, year = 1, age = 1, age_maturity = 2, emigrate = 0, birth = 0, death = 0),
-                    # lake = NULL)
+waterbodies <- list(current_river = data.frame(fish = 1:100, year = 1, age = 1, 
+                                               age_maturity = 2, emigrate = 0, birth = 0, death = 0),
+                    lake = NULL)
 
-current_river <- data.frame(fish = 1:100, year = 1, age = 1, age_maturity = 2, emigrate = 0, birth = 0, death = 0)
-lake <- NULL
+# current_river <- data.frame(fish = 1:100, year = 1, age = 1, age_maturity = 2, emigrate = 0, birth = 0, death = 0)
+# lake <- NULL
 gens <- c(2:200)
 emigrants <- NULL
-
-
 census <- waterbodies$current_river
-j=1
 for(j in gens){
   #------- emigration
   
-  current_river <- emigrate(current_river)
-  emigrants <- rbind(emigrants, current_river[current_river[,5]==1,]) # add emigrants to emigrant dataframe
-  current_river <- current_river[current_river[,5]==0,] #drop individuals tha emigrated
+  waterbodies$current_river <- emigrate(waterbodies$current_river)
+  emigrants <- rbind(emigrants, waterbodies$current_river[waterbodies$current_river[,5]==1,]) # add emigrants to emigrant dataframe
+  waterbodies$current_river <- waterbodies$current_river[waterbodies$current_river[,5]==0,] #drop individuals tha emigrated
   
   #------- migrate
-  current_river <- migrate(current_river)
+  waterbodies <- migrate(current_river = waterbodies$current_river, lake = waterbodies$lake)
   
   #------- density dependence
-  current_river <- density_dependence(current_river)
+  waterbodies$current_river <- density_dependence(waterbodies$current_river)
   
   #------ births
-  current_river <- make_baby(current_river)
+  waterbodies$current_river <- make_baby(waterbodies$current_river)
   
   #------ add individuals to census, add babies to next gen, add gen
-  census <- rbind(census, current_river, lake)
+  census <- rbind(census, waterbodies$current_river, waterbodies$lake)
   #remake current river based on sum of births 
-  if(is.null(current_river)==TRUE){
-    print("No births, fish are in lake")
+  if(is.null(waterbodies$current_river)==TRUE){
+    print(paste("No births, fish are in lake. The year is", j))
   } else{
-  current_river <- data.frame(fish = 1:sum(current_river[,6]), year = j, age = 1, age_maturity = 2, emigrate = 0, birth = 0, death = 0)
+  waterbodies$current_river <- data.frame(fish = 1:sum(waterbodies$current_river[,6]), year = j, age = 1, age_maturity = 2, emigrate = 0, birth = 0, death = 0)
   }
 }
 
