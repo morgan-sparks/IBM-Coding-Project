@@ -82,7 +82,7 @@ migrate <- function(lake){
   # index lake for fish that are less than age at maturity, drop fish that have aged out
   # then add a year
   
-  lake_nonmigs <- which(lake[,"age"] > lake[,"age_maturity"]) #lake non-migrants
+  lake_nonmigs <- which(lake[,"age"] < lake[,"age_maturity"]) #lake non-migrants
   lake <- lake[lake_nonmigs,]
   
   lake[,"age"] <- lake[,"age"] + 1
@@ -148,7 +148,7 @@ density_dependence <- function(rivers){
 
 #------- births
 make_baby <- function(rivers){
-  if(is.null(rivers)==TRUE){
+  if(nrow(rivers)==0){
     print(paste("No spawning, fish are in lake"))
   } else{ 
     for(i in 1:nrow(rivers)){
@@ -205,7 +205,7 @@ for (j in gens){
   
   #------- migrate
   
-  waterbodies$lake <- migrate(lake = waterbodies$lake)
+  waterbodies <- migrate(lake = waterbodies$lake)
   
   #------- density dependence
   
@@ -215,9 +215,58 @@ for (j in gens){
   
   waterbodies$rivers <- lapply(waterbodies$rivers, make_baby)
   
+  #------- compile summary statistics
   
+  ### for current river
+  if(is.null(waterbodies$rivers[1]) == TRUE){
+    cr_N <- 0
+    cr_births <- 0
+  }else{
+  cr_N <- nrow(waterbodies$rivers$current_river) # number of fish that spawned
+  cr_births <- sum(waterbodies$rivers$current_river[,"birth"]) # number of babies born
+  }
   
+  ### for wolf river
+  if(is.null(waterbodies$rivers[2]) == TRUE){
+    wr_N <- 0
+    wr_births <- 0
+  } else{
+  wr_N <- nrow(waterbodies$rivers$wolf_river) # number of fish that spawned
+  wr_births <- sum(waterbodies$rivers$wolf_river[,"birth"]) # number of babies born
+  }
   
+  ### for lake
+  if(is.null(waterbodies$lake) == TRUE){
+    lake_N <- 0
+  } else{
+  lake_N <- nrow(waterbodies$lake)
+  }
+  
+  sum_stats <- rbind(sum_stats, cbind(cr_N, cr_births, wr_N, wr_births, lake_N))
+  
+  #------- remake waterbodies with new births
+  
+  ### current river
+  if(is.null(waterbodies$rivers$current_river)== TRUE){
+    current_river <- NULL
+  }else{
+  current_river <- data.frame(fish = sum(waterbodies$rivers$current_river[,"birth"]), 
+                              mig_river = "current_river", year = j, age = 1, age_maturity = 2, 
+                              emigrate = 0, birth = 0, death = 0, stringsAsFactors = FALSE)
+  }
+  
+  ### wolf river
+  if(is.null(waterbodies$rivers$wolf_river)== TRUE){
+    wolf_river <- NULL
+  }else{
+    wolf_river <- data.frame(fish = sum(waterbodies$rivers$wolf_river[,"birth"]), 
+                                mig_river = "wolf_river", year = j, age = 1, age_maturity = 2, 
+                                emigrate = 0, birth = 0, death = 0, stringsAsFactors = FALSE)
+  }
+  
+  waterbodies <- list(rivers = list(current_river = current_river, wolf_river = wolf_river), 
+                      lake = waterbodies$lake)
   
 
 }
+
