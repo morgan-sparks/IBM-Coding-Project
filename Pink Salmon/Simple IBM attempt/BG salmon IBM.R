@@ -1,5 +1,5 @@
 ##################################################
-#Last edited by B. Goller on 29 March 2021
+#Last edited by B. Goller on 31 March 2021
 #Set up simple salmon IBM
 ##################################################
 #Get the required packages
@@ -167,7 +167,7 @@ for(a in 1:length(lake.survey)){
 }
 
 lake.fish.count <- data.frame(lake.fish.count)
-colnames(lake.fish.count) <- c("entry.num", "year", "total.pop", "current.pop", "wolf.pop", "steel.pop")
+colnames(lake.fish.count) <- c("entry.num", "year", "total.pop", "current.pop", "wolf.pop", "steel.pop", "yrmat3.pop")
 library(ggplot2)
 
 ggplot(data = lake.fish.count, aes(x = year, y = total.pop))+
@@ -175,4 +175,9 @@ ggplot(data = lake.fish.count, aes(x = year, y = total.pop))+
   geom_point(data = lake.fish.count, aes(x = year, y = current.pop), col = 2)+
   geom_point(data = lake.fish.count, aes(x = year, y = wolf.pop), col = 3)+
   geom_point(data = lake.fish.count, aes(x = year, y = steel.pop), col = 4)+
+  theme_classic()
+
+ggplot(data = lake.fish.count, aes(x = year, y = total.pop))+
+  geom_point()+
+  geom_point(data = lake.fish.count, aes(x = year, y = yrmat3.pop), col = 2)+
   theme_classic()
