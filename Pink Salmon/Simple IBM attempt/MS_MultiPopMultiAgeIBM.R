@@ -246,9 +246,9 @@ for (j in gens){
 
 sum_stats <- data.frame(sum_stats)
 
-odd_years <- seq(1, 199, by = 2)
-even_years <- seq(2, 200, by =2)
-y200 <- ggplot(data = sum_stats[1:50,])+
+odd_years <- seq(2, 200, by = 2)
+even_years <- seq(1, 199, by =2)
+y200 <- ggplot(data = sum_stats)+
   geom_line(data = sum_stats[odd_years, ],aes(x = year, y = cr_N, color = "Current River", linetype = "odd"), size =0.5) +
   geom_line(data = sum_stats[even_years, ],aes(x = year, y = cr_N, color = "Current River", linetype = "even"), size =0.5) +
   geom_line(data = sum_stats[odd_years, ],aes(x =year, y = wr_N, color = "Wolf River", linetype = "odd"), size =0.5 ) +
@@ -262,9 +262,9 @@ y200 <- ggplot(data = sum_stats[1:50,])+
   theme_classic(base_size = 14) +
   theme(legend.position = "none") 
 
-odd_years <- seq(1, 9, by = 2)
-even_years <- seq(2, 10, by =2)
-y10 <- ggplot(data = sum_stats[1:50,])+
+odd_years <- seq(2, 10, by = 2)
+even_years <- seq(1, 9, by =2)
+y10 <- ggplot(data = sum_stats[1:10,])+
   geom_line(data = sum_stats[odd_years, ],aes(x = year, y = cr_N, color = "Current River", linetype = "odd"), size =0.5) +
   geom_line(data = sum_stats[even_years, ],aes(x = year, y = cr_N, color = "Current River", linetype = "even"), size =0.5) +
   geom_line(data = sum_stats[odd_years, ],aes(x =year, y = wr_N, color = "Wolf River", linetype = "odd"), size =0.5 ) +
@@ -278,8 +278,8 @@ y10 <- ggplot(data = sum_stats[1:50,])+
   theme_classic(base_size = 14) +
   theme(legend.position = "none") 
 
-odd_years <- seq(1, 49, by = 2)
-even_years <- seq(2, 50, by =2)
+odd_years <- seq(2, 50, by = 2)
+even_years <- seq(1, 49, by =2)
 y50 <- ggplot(data = sum_stats[1:50,])+
   geom_line(data = sum_stats[odd_years, ],aes(x = year, y = cr_N, color = "Current River", linetype = "odd"), size =0.5) +
   geom_line(data = sum_stats[even_years, ],aes(x = year, y = cr_N, color = "Current River", linetype = "even"), size =0.5) +
@@ -298,5 +298,16 @@ y50 <- ggplot(data = sum_stats[1:50,])+
 
 
 
+
+ggplot(data = sum_stats)+
+  geom_line(,aes(x =year, y = wr_N, color = "Wolf River", linetype = "even"), size =0.5, linetype = "dashed") +
+  geom_hline(yintercept = 5000, linetype = "dashed" ) +
+  scale_color_manual(name = "Population", 
+                     values = c("Current River" = "dodgerblue", "Wolf River" = "orange")) +
+  scale_linetype_manual(name = "Spawn Year",
+                        values=c("odd" = "solid", "even" = "dashed")) +
+  labs( x ="Year", y = "Population size", title= "Years 1-200") +
+  theme_classic(base_size = 14) +
+  theme(legend.position = "none")
 
 
