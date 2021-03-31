@@ -157,9 +157,9 @@ for(i in c(1:200)){
   lake.survey[[i+1]] <- lake.fishes
 }
 
-lake.fish.count <- matrix(NA, length(lake.survey), 6)
+lake.fish.count <- matrix(NA, length(lake.survey), 7)
 for(a in 1:length(lake.survey)){
-  lake.fish.count[a,] <- c(a, nrow(lake.survey[[a]]),
+  lake.fish.count[a,] <- c(a, lake.survey[[a]]$year[1], nrow(lake.survey[[a]]),
                            sum(lake.survey[[a]]$river == "Current"),
                            sum(lake.survey[[a]]$river == "Wolf"),
                            sum(lake.survey[[a]]$river == "Steel"),
@@ -167,7 +167,7 @@ for(a in 1:length(lake.survey)){
 }
 
 lake.fish.count <- data.frame(lake.fish.count)
-colnames(lake.fish.count) <- c("year", "total.pop", "current.pop", "wolf.pop", "steel.pop")
+colnames(lake.fish.count) <- c("entry.num", "year", "total.pop", "current.pop", "wolf.pop", "steel.pop")
 library(ggplot2)
 
 ggplot(data = lake.fish.count, aes(x = year, y = total.pop))+
