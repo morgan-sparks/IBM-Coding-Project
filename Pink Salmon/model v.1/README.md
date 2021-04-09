@@ -11,10 +11,10 @@ How quickly do fish invade Lake Superior?
 ## Functions
 
 1. Births (this will be for actually creating babies), use gamma distribution (0.5,0.5)
-  * track parameters from parents --> age at maturity, spawn river
+    * track parameters from parents --> age at maturity, spawn river
 2. Mortality (not added yet)
-3a. Age at maturity == age (if yes go to step 4)
-3b Age +1
+3. (a) Age at maturity == age (if yes go to step 4)
+3. (b) Age +1
 4. Migrate to home river or stray
 5. Density dependence (e.g., how many spawning spots available in a river, kill if > K)
 6. Pair up adults of different sexes to spawn
