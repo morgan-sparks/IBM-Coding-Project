@@ -2,6 +2,7 @@
 
 ## Question
 How quickly do fish invade Lake Superior?
+What is the fitness of different aged fish (also those that strayed vs. those that stayed in river)
 
 ## Parameters
 
@@ -30,6 +31,8 @@ Two Minnesota tributaries: Nicolette and Spangler 1986, Cascade River (N_hat = 1
 4. Migrate to home river or stray
 5. Density dependence (e.g., how many spawning spots available in a river, kill if > K)
 6. Pair up adults of different sexes to spawn
+
+--somewhere in here we need to add fitness calculation
 
 ## Data strucutre
 1. Lake --> one dataframe that doesn't maintain info from past gens
