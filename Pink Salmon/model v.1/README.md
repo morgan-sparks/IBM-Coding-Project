@@ -14,9 +14,9 @@ There seems like there could be many (>60), but it's not clear how many and thei
 
 Relevant citations:
 
-South shore Lake Superior: Wagner and Stauffer 1982, ~50 rivers they think had populations 
-North Shore Superior: Kwain 1982, ~ 8 rivers in this citation 
-Two Minnesota tributaries: Nicolette and Spangler 1986, Cascade River (N_hat = 1250 +/- 300 95%CI) and Cross River (N_hat = 2000 +/- 100) 
+ South shore Lake Superior: Wagner and Stauffer 1982, ~50 rivers they think had populations 
+ North Shore Superior: Kwain 1982, ~ 8 rivers in this citation 
+ Two Minnesota tributaries: Nicolette and Spangler 1986, Cascade River (N_hat = 1250 +/- 300 95%CI) and Cross River (N_hat = 2000 +/- 100) 
 
 ## Functions
 
