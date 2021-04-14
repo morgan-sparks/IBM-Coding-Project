@@ -12,7 +12,7 @@ How quickly do fish invade Lake Superior?
 
 There seems like there could be many (>60), but it's not clear how many and their relative population size.
 
-Relevant citations:
+*Relevant citations:*
 
 South shore Lake Superior: Wagner and Stauffer 1982, ~50 rivers they think had populations 
 
