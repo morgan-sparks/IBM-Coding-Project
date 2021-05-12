@@ -3,7 +3,7 @@
 #Data structure to hold the habitat information
 habitat <- data.frame(river = c("Current", "Wolf", "Steel"), 
                       pop.k = c(500, 500, 2000), 
-                      migr.curr = c(95,5,0), 
+                      migr.curr = c(95,10,0), 
                       migr.wolf = c(5,90,5), 
                       migr.steel = c(0,5,95))
 #Alternatively, have the habitat variants be their own .csv file
@@ -42,7 +42,7 @@ lake.salmon$river <- rep("Current",nrow(lake.salmon))
 #will need a line for handling factors to ensure that river is a factor 
 #with all possible rivers based on habitat
 #initial fish have not had the opportunity to migrate
-lake.salmon$migrant <- rep(0,nrow(lake.salmon))
+lake.salmon$migrant <- rep("Current",nrow(lake.salmon))
 
 #initial fish have not had a breeding opportunity so leave num.f1 as 'NA'
 #similarly they are the original fish so we won't have info on their parents
