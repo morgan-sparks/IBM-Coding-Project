@@ -13,6 +13,14 @@ What is the fitness of different aged fish (also those that strayed vs. those th
 
 There seems like there could be many (>60), but it's not clear how many and their relative population size.
 
+For now let's do 50 pops:
+
+5 with k = 50,000
+10 with k = 20,000
+15 with k = 5,0000
+20 with k = 1,500
+
+
 *Relevant citations:*
 
 South shore Lake Superior: Wagner and Stauffer 1982, ~50 rivers they think had populations 
