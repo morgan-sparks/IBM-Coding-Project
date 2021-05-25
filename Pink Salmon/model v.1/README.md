@@ -16,8 +16,11 @@ There seems like there could be many (>60), but it's not clear how many and thei
 For now let's do 50 pops:
 
 5 with k = 50,000
+
 10 with k = 20,000
+
 15 with k = 5,0000
+
 20 with k = 1,500
 
 
