@@ -1,4 +1,8 @@
 #Data structure to hold all fish currently in the lake population
+directory = paste(getwd(), "/Pink Salmon/model v.1/", sep = '')
+source(paste(directory, "/source/FunctionSourcer.R", sep = ''))   #source functions and set source directory
+
+habitat <- SampleHabitat()
 
 #Data structure to hold the habitat information
 habitat <- data.frame(river = c("Current", "Wolf", "Steel"), 
