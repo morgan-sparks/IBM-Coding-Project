@@ -10,7 +10,7 @@ emigrate <-  function(lake.salmon , habitat){
                                    # above, select the row where the home river in fish.to.mat matches the row in habitat 
                                    # and select columns 3:5, which are the probabilities of straying to other rivers.
  }
- # change migrant in lake
+ # change mig.river in lake by selecting fish # in lake.salmon that match those you changed
  lake.salmon[which(lake.salmon$fish.num == fish.to.mat$fish.num), "mig.river"] <- fish.to.mat$mig.river
  return(lake.salmon)
 }
