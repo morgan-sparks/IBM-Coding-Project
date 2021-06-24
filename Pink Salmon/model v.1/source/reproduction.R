@@ -16,9 +16,11 @@ reproduce <-  function(lake.salmon){
     
     # num.mates is the number of maiting pairs based on the whether there are fewer males or females in a pop
     # if length of pop.f is shorter or equal to pop.m, make object length pop.f, else make object length pop.m
-    num.mates <- ifelse(length(pop.f) <= length(pop.m), length(pop.f), length(pop.m)) 
+    num.mates <- ifelse(length(pop.f) <= length(pop.m), # logical statement
+                        length(pop.f), # if true
+                        length(pop.m)) # if false
       
-    # sample random male and females as pairs for length num.mates to pair and creat offspring
+    # sample random male and females as pairs for length num.mates to pair and creat offspring (sample_n() samples an entire row)
       for (n in 1:num.mates){
       f.fish <- dplyr::sample_n(pop.f, 1, replace = FALSE)
       m.fish <- dplyr::sample_n(pop.m, 1, replace = FALSE)
