@@ -22,4 +22,5 @@ density_dependence <-  function(lake.salmon , habitat){
   
   # remove those fish that were killed (probably won't actually remove them, just give them a 1 or 0 to indicate if alive or dead)
   lake.salmon <- lake.salmon[!(lake.salmon$fish.num %in% fish_to_kill),] 
+  return(lake.salmon)
 }
