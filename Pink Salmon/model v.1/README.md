@@ -58,3 +58,6 @@ Two Minnesota tributaries: Nicolette and Spangler 1986, Cascade River (N_hat = 1
    * need to set up some redundancy where we can click on and off functions (i.e. age = 1 or 2 at beginning of script to turn off and on life history variation)
 * figure out sourcing and how to set up (should be source script that points to source folder with functions as individual scripts, and then an output folder)
 * will straying be a matrix with likelihoods built in?
+
+## Questions for the group
+ - [] How do we want to handle dead individuals (delete whent the die vs. add death column and then delete at end of year after appended to census dataframe)
