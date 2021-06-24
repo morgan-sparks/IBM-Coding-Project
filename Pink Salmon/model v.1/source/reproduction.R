@@ -57,6 +57,5 @@ reproduce <-  function(lake.salmon){
       }
   }
   lake.salmon <- rbind(lake.salmon, new_babies) # append new babies to lake.salmon
-  
   return(lake.salmon)
 }
