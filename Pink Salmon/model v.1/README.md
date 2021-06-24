@@ -53,11 +53,11 @@ Two Minnesota tributaries: Nicolette and Spangler 1986, Cascade River (N_hat = 1
 ------------------------------------------------------------------------
 ## To do
 
-* set up data structure (Mark did a big array-based model and did 20 pops at k=12000 each and it sounded real big so maybe we limit around there, though maybe had juvenile pops up to 800000)---> maybe realistic for us is 50 pops with a few big pops and a lot of intermediate to small pops
+- [x] set up data structure (Mark did a big array-based model and did 20 pops at k=12000 each and it sounded real big so maybe we limit around there, though maybe had juvenile pops up to 800000)---> maybe realistic for us is 50 pops with a few big pops and a lot of intermediate to small pops
    * one big lake with multiple rivers where habitat changes to lake and back based on maturity
    * need to set up some redundancy where we can click on and off functions (i.e. age = 1 or 2 at beginning of script to turn off and on life history variation)
-* figure out sourcing and how to set up (should be source script that points to source folder with functions as individual scripts, and then an output folder)
-* will straying be a matrix with likelihoods built in?
+- [x] figure out sourcing and how to set up (should be source script that points to source folder with functions as individual scripts, and then an output folder)
+- [x] will straying be a matrix with likelihoods built in?
 
 ## Questions for the group
  - [ ] How do we want to handle dead individuals (delete whent the die vs. add death column and then delete at end of year after appended to census dataframe)
