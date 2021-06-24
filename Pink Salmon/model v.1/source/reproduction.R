@@ -1,4 +1,4 @@
-reproduce <-  function(lake.salmon){
+reproduce <-  function(lake.salmon, habitat){
   spawning_fish <- lake.salmon[which(lake.salmon$age.mat-lake.salmon$age == 0),] #select only fish that will be in rivers
   
   new_babies <- NULL # set up a blank object to append babies in to
@@ -24,17 +24,16 @@ reproduce <-  function(lake.salmon){
       baby.num <- round(sample(fecundity, num.mates, replace = TRUE)) # sample fecundity distribution for number of fish born
       
       for (n in 1:num.mates){
-      babies <- data.frame(matrix(NA, baby.num, 11)) #make empty matrix of length baby.num with 11 columns
+      babies <- data.frame(matrix(NA, baby.num[n], 11)) #make empty matrix of length baby.num with 11 columns
       colnames(babies) <- c("year", "fish.num", "sex", "mass", "age", "age.mat", "river", "mig.river", "num.f1", "mom.num", "dad.num")
       
       babies$year <- max(lake.salmon$year) +1 # add a year to most recent in lake.salmon
       babies$fish.num <-  #give fish unique numbers
         if(is.null(new_babies) == TRUE){ # if you're on the first set of fish
-          c(max(lake.salmon$fish.num)+c(1:baby.num))} 
-        else{ # derive numbers from lake.salmon
-         c(max(new_babies$fish.num)+c(1:baby.num)) # otherwise derive numbers from new_babies
+          c(max(lake.salmon$fish.num)+c(1:baby.num[n]))}else{ # derive numbers from lake.salmon
+         c(max(new_babies$fish.num)+c(1:baby.num[n])) # otherwise derive numbers from new_babies
           }
-      babies$sex <- factor(sample(x = c("M","F"), size = baby.num, replace = TRUE, prob = c(0.5, 0.5))) # sample sex on a 50:50 ratio
+      babies$sex <- factor(sample(x = c("M","F"), size = baby.num[n], replace = TRUE, prob = c(0.5, 0.5))) # sample sex on a 50:50 ratio
       babies$mass <- rnorm(nrow(babies), mean = 3, sd = 0.5) # give mass
       babies$age <- 0 #age = 0
       ######----------------
@@ -44,9 +43,9 @@ reproduce <-  function(lake.salmon){
       ######----------------
       babies$river <- f.fish[n,]$mig.river # make home river the river where mom spawned
       babies$mig.river <- NA # to be populated later
-      babies$num.f1 <- 0 # no reproduction yet
+      babies$num.f1 <- NA # no reproduction yet
       babies$mom.num <- f.fish[n,]$fish.num # add mother's fish num for pedigree
-      babies$dad.num <- m.fish[n,]$dad.num # add father's fish num for pedigree
+      babies$dad.num <- m.fish[n,]$fish.num # add father's fish num for pedigree
       
       # append babies into new babies
       new_babies <- rbind(new_babies, babies)
