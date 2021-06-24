@@ -37,7 +37,10 @@ reproduce <-  function(lake.salmon){
       babies$sex <- factor(sample(x = c("M","F"), size = baby.num, replace = TRUE, prob = c(0.5, 0.5))) # sample sex on a 50:50 ratio
       babies$mass <- rnorm(nrow(babies), mean = 3, sd = 0.5) # give mass
       babies$age <- 0 #age = 0
+      ######----------------
+      ######----------------
       babies$age.mat <- 2 # age at maturity = 0 (make to toggle for later)
+      ######----------------
       ######----------------
       babies$river <- f.fish[n,]$mig.river # make home river the river where mom spawned
       babies$mig.river <- NA # to be populated later
