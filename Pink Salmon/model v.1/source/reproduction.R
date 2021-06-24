@@ -30,10 +30,10 @@ reproduce <-  function(lake.salmon){
       babies$year <- max(lake.salmon$year) +1 # add a year to most recent in lake.salmon
       babies$fish.num <-  #give fish unique numbers
         if(is.null(new_babies) == TRUE){ # if you're on the first set of fish
-        c(max(lake.salmon$fish.num)+c(1:baby.num)) else{ # derive numbers from lake.salmon
+          c(max(lake.salmon$fish.num)+c(1:baby.num))} 
+        else{ # derive numbers from lake.salmon
          c(max(new_babies$fish.num)+c(1:baby.num)) # otherwise derive numbers from new_babies
-        }
-        }
+          }
       babies$sex <- factor(sample(x = c("M","F"), size = baby.num, replace = TRUE, prob = c(0.5, 0.5))) # sample sex on a 50:50 ratio
       babies$mass <- rnorm(nrow(babies), mean = 3, sd = 0.5) # give mass
       babies$age <- 0 #age = 0
