@@ -1,5 +1,3 @@
-# in progress
-
 reproduce <-  function(lake.salmon){
   spawning_fish <- lake.salmon[which(lake.salmon$age.mat-lake.salmon$age == 0),] #select only fish that will be in rivers
   
@@ -49,6 +47,10 @@ reproduce <-  function(lake.salmon){
       
       # append babies into new babies
       new_babies <- rbind(new_babies, babies)
+      
+      #record parent fecundity for future fitness calculations
+      lake.salmon$num.f1[which(lake.salmon$fish.num == f.fish$fish.num[n])] <- baby.num[n] 
+      lake.salmon$num.f1[which(lake.salmon$fish.num == m.fish$fish.num[n])] <- baby.num[n]
       }
   }
   lake.salmon <- rbind(lake.salmon, new_babies) # append new babies to lake.salmon
