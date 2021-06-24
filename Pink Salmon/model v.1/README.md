@@ -60,4 +60,4 @@ Two Minnesota tributaries: Nicolette and Spangler 1986, Cascade River (N_hat = 1
 * will straying be a matrix with likelihoods built in?
 
 ## Questions for the group
- - [] How do we want to handle dead individuals (delete whent the die vs. add death column and then delete at end of year after appended to census dataframe)
+ - [ ] How do we want to handle dead individuals (delete whent the die vs. add death column and then delete at end of year after appended to census dataframe)
