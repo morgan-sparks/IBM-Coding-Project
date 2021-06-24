@@ -1,5 +1,5 @@
 reproduce <-  function(lake.salmon, habitat){
-  spawning_fish <- lake.salmon[which(lake.salmon$age.mat-lake.salmon$age == 0),] #select only fish that will be in rivers
+  spawning_fish <- lake.salmon[which(lake.salmon$age.mat-lake.salmon$age == 0 & lake.salmon$died == 0),] #select only fish that will be in rivers and haven't died
   if(nrow(spawning_fish)>=2){
     new_babies <- NULL # set up a blank object to append babies in to
     
