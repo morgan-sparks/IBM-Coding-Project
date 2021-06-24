@@ -16,8 +16,8 @@ habitat <- data.frame(river = c("Current", "Wolf", "Steel"),
 #set up the data frame for the lake population
 #start with some initial colonizing population (those first released into lake)
 pop.initial <- 100
-lake.salmon <- data.frame(matrix(NA, pop.initial, 11))
-colnames(lake.salmon) <- c("year", "fish.num", "sex", "mass", "age", "age.mat", "river", "mig.river", "num.f1", "mom.num", "dad.num")
+lake.salmon <- data.frame(matrix(NA, pop.initial, 12))
+colnames(lake.salmon) <- c("year", "fish.num", "sex", "mass", "age", "age.mat", "river", "mig.river","died", "num.f1", "mom.num", "dad.num")
 
 #what year were the fish released?
 lake.salmon$year <- rep(1950, nrow(lake.salmon))
@@ -47,6 +47,10 @@ lake.salmon$river <- rep("Current",nrow(lake.salmon))
 #with all possible rivers based on habitat
 #initial fish have not had the opportunity to migrate
 lake.salmon$mig.river <- rep("Current",nrow(lake.salmon))
+
+#died <---- column to record death 0 == alive, 1 == dead
+
+lake.salmon$died <- 0
 
 #initial fish have not had a breeding opportunity so leave num.f1 as 'NA'
 #similarly they are the original fish so we won't have info on their parents

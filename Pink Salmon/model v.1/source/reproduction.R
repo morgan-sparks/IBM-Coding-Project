@@ -26,7 +26,7 @@ reproduce <-  function(lake.salmon, habitat){
         for (n in 1:num.mates){
           if(baby.num[n] > 0){
             babies <- data.frame(matrix(NA, baby.num[n], 11)) #make empty matrix of length baby.num with 11 columns
-            colnames(babies) <- c("year", "fish.num", "sex", "mass", "age", "age.mat", "river", "mig.river", "num.f1", "mom.num", "dad.num")
+            colnames(babies) <- c("year", "fish.num", "sex", "mass", "age", "age.mat", "river", "mig.river", "died", "num.f1", "mom.num", "dad.num")
             
             babies$year <- max(lake.salmon$year) +1 # add a year to most recent in lake.salmon
             babies$fish.num <-  #give fish unique numbers
@@ -44,6 +44,7 @@ reproduce <-  function(lake.salmon, habitat){
             ######----------------
             babies$river <- f.fish[n,]$mig.river # make home river the river where mom spawned
             babies$mig.river <- NA # to be populated later
+            babies$died <- 0 # all fish alive, 0 = alive
             babies$num.f1 <- NA # no reproduction yet
             babies$mom.num <- f.fish[n,]$fish.num # add mother's fish num for pedigree
             babies$dad.num <- m.fish[n,]$fish.num # add father's fish num for pedigree
@@ -54,6 +55,7 @@ reproduce <-  function(lake.salmon, habitat){
             #record parent fecundity for future fitness calculations
             lake.salmon$num.f1[which(lake.salmon$fish.num == f.fish$fish.num[n])] <- baby.num[n] 
             lake.salmon$num.f1[which(lake.salmon$fish.num == m.fish$fish.num[n])] <- baby.num[n]
+            
           }
         }
       }
@@ -61,5 +63,7 @@ reproduce <-  function(lake.salmon, habitat){
     }
     lake.salmon <- rbind(lake.salmon, new_babies) # append new babies to lake.salmon
   }
+  # kill fish that spawned
+  lake.salmon$died[which(lake.salmon$fish.num %in% spawning_fish$fish.num)] <- 1
   return(lake.salmon)
 }
