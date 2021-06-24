@@ -50,4 +50,3 @@ lake.salmon$mig.river <- rep("Current",nrow(lake.salmon))
 
 #initial fish have not had a breeding opportunity so leave num.f1 as 'NA'
 #similarly they are the original fish so we won't have info on their parents
-
