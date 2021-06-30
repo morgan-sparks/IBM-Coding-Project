@@ -28,7 +28,7 @@ reproduce <-  function(lake.salmon, habitat){
           
           for (n in 1:num.mates){
             if(baby.num[n] > 0){
-              babies <- data.frame(matrix(NA, baby.num[n], 12)) #make empty matrix of length baby.num with 11 columns
+              babies <- data.frame(matrix(NA, baby.num[n], 12)) #make empty matrix of length baby.num with 12 columns
               colnames(babies) <- c("year", "fish.num", "sex", "mass", "age", "age.mat", "river", "mig.river", "died", "num.f1", "mom.num", "dad.num")
               
               babies$year <- max(lake.salmon$year) +1 # add a year to most recent in lake.salmon
@@ -47,7 +47,6 @@ reproduce <-  function(lake.salmon, habitat){
               ######----------------
               babies$river <- f.fish[n,]$mig.river # make home river the river where mom spawned
               babies$mig.river <- NA # to be populated later
-              babies$diwed <- 0
               babies$died <- 0 # all fish alive, 0 = alive
               babies$num.f1 <- NA # no reproduction yet
               babies$mom.num <- f.fish[n,]$fish.num # add mother's fish num for pedigree
