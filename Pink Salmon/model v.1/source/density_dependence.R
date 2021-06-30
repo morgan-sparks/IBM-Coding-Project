@@ -22,9 +22,10 @@ density_dependence <-  function(lake.salmon , habitat){
         }
       }
     }
+    
+    # kill fish that were in excess of k
+    lake.salmon$died[which(lake.salmon$fish.num %in% fish_to_kill)] <- 1
+    return(lake.salmon)
   }
   
-  # kill fish that were in excess of k
-  lake.salmon$died[which(lake.salmon$fish.num %in% fish_to_kill)] <- 1
-  return(lake.salmon)
 }
