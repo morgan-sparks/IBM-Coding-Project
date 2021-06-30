@@ -54,3 +54,26 @@ lake.salmon$died <- 0
 
 #initial fish have not had a breeding opportunity so leave num.f1 as 'NA'
 #similarly they are the original fish so we won't have info on their parents
+
+census <- NULL
+years <- c(1:10)
+
+for (i in years){
+  #####-----emigrate
+  emigrate(lake.salmon, habitat)
+  
+  #####-----age_fish
+  age_fish(lake.salmon)
+  
+  #####-----density dependence
+  density_dependence(lake.salmon, habitat)
+  
+  #####-----reproduction
+  reproduce(lake.salmon, habitat)
+  
+  #####-----mortality
+  mortality(lake.salmon)
+  
+  census[[i]] <- lake.salmon
+  
+}
