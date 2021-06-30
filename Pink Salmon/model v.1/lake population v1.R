@@ -56,9 +56,11 @@ lake.salmon$died <- 0
 #similarly they are the original fish so we won't have info on their parents
 
 census <- NULL
-years <- c(1:10)
+years <- c(1:100)
 
 for (i in years){
+  print(i)
+  
   #####-----emigrate
   lake.salmon <- emigrate(lake.salmon, habitat)
   
@@ -71,9 +73,9 @@ for (i in years){
   #####-----reproduction
   lake.salmon <- reproduce(lake.salmon, habitat)
   
-  #####-----mortality
-  lake.salmon <- mortality(lake.salmon)
-  
+  #keep track of every fish that were alive in this year
   census[[i]] <- lake.salmon
   
+  #####-----mortality
+  lake.salmon <- mortality(lake.salmon)
 }
