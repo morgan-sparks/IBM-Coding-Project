@@ -60,19 +60,19 @@ years <- c(1:10)
 
 for (i in years){
   #####-----emigrate
-  emigrate(lake.salmon, habitat)
+  lake.salmon <- emigrate(lake.salmon, habitat)
   
   #####-----age_fish
-  age_fish(lake.salmon)
+  lake.salmon <- age_fish(lake.salmon)
   
   #####-----density dependence
-  density_dependence(lake.salmon, habitat)
+  lake.salmon <- density_dependence(lake.salmon, habitat)
   
   #####-----reproduction
-  reproduce(lake.salmon, habitat)
+  lake.salmon <- reproduce(lake.salmon, habitat)
   
   #####-----mortality
-  mortality(lake.salmon)
+  lake.salmon <- mortality(lake.salmon)
   
   census[[i]] <- lake.salmon
   

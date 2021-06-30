@@ -1,6 +1,6 @@
 reproduce <-  function(lake.salmon, habitat){
   spawning_fish <- lake.salmon[which(lake.salmon$age.mat-lake.salmon$age == 0 & lake.salmon$died == 0),] #select only fish that will be in rivers and haven't died
-  if(nrow(spawning_fish)>=20){
+  if(is.null(spawning_fish)== FALSE){
     new_babies <- NULL # set up a blank object to append babies in to
     
     fecundity <- rgamma(1000, shape = 1.5, rate = 0.5) # = ~3 fish born or 1.5 fish per parent
@@ -8,7 +8,7 @@ reproduce <-  function(lake.salmon, habitat){
     #select a river from habitat and subset that river
     for (r in levels(habitat$river)){
       population <- spawning_fish[which(spawning_fish$mig.river == r),] # subset population of fish returning to river r
-      if(nrow(population)>=20){
+      if(is.null(population) == FALSE){
         pop.f <- population[which(population$sex == "F"),] # select females
         pop.m <- population[which(population$sex == "M"),] # select males
         
@@ -28,7 +28,7 @@ reproduce <-  function(lake.salmon, habitat){
           
           for (n in 1:num.mates){
             if(baby.num[n] > 0){
-              babies <- data.frame(matrix(NA, baby.num[n], 11)) #make empty matrix of length baby.num with 11 columns
+              babies <- data.frame(matrix(NA, baby.num[n], 12)) #make empty matrix of length baby.num with 11 columns
               colnames(babies) <- c("year", "fish.num", "sex", "mass", "age", "age.mat", "river", "mig.river", "died", "num.f1", "mom.num", "dad.num")
               
               babies$year <- max(lake.salmon$year) +1 # add a year to most recent in lake.salmon
@@ -47,6 +47,7 @@ reproduce <-  function(lake.salmon, habitat){
               ######----------------
               babies$river <- f.fish[n,]$mig.river # make home river the river where mom spawned
               babies$mig.river <- NA # to be populated later
+              babies$diwed <- 0
               babies$died <- 0 # all fish alive, 0 = alive
               babies$num.f1 <- NA # no reproduction yet
               babies$mom.num <- f.fish[n,]$fish.num # add mother's fish num for pedigree

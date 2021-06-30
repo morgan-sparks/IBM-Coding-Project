@@ -1,7 +1,7 @@
 density_dependence <-  function(lake.salmon , habitat){
   spawning_fish <- lake.salmon[which(lake.salmon$age.mat-lake.salmon$age == 0),] #select only fish that will be in rivers
   
-  if(nrow(spawning_fish) > 0){
+  if(is.null(spawning_fish) == FALSE){
     fish_to_kill <- NULL # set up a blank object to append fish to kill
     
     #select a river from habitat and subset that river
@@ -27,5 +27,4 @@ density_dependence <-  function(lake.salmon , habitat){
     lake.salmon$died[which(lake.salmon$fish.num %in% fish_to_kill)] <- 1
     return(lake.salmon)
   }
-  
 }
