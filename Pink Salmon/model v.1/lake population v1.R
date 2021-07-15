@@ -56,7 +56,7 @@ lake.salmon$died <- 0
 #similarly they are the original fish so we won't have info on their parents
 
 census <- NULL
-years <- c(1:100)
+years <- c(1:10)
 
 for (i in years){
   print(i)
@@ -79,3 +79,4 @@ for (i in years){
   #####-----mortality
   lake.salmon <- mortality(lake.salmon)
 }
+
