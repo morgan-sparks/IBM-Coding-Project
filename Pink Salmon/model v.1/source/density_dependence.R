@@ -8,10 +8,10 @@ density_dependence <-  function(lake.salmon , habitat){
     for (r in levels(habitat$river)){
       population <- spawning_fish[which(spawning_fish$mig.river == r),] # subset population of fish returning to river r
       if(nrow(population) > 0){
-        pop.k <- habitat[which(habitat$river == r), "pop.k"] # grab carrying capacity value from habitat df
+        pop.k <- habitat[which(habitat$river == r), "size"] # grab carrying capacity value from habitat df
         pop.size <- nrow(population) # how many fish are in population
         
-        # if there are more fish than carrying capacity (pop.k), kill excess
+        # if there are more fish than carrying capacity (size), kill excess
         if(pop.size > pop.k){
           kill.num <- pop.size - pop.k # number to kill (pop size - k)
           

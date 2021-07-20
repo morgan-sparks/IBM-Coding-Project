@@ -11,5 +11,5 @@ source(paste(getwd(), "/density_dependence.R", sep = ''))
 source(paste(getwd(), "/emigrate.R", sep = ''))
 source(paste(getwd(), "/mortality.R", sep = ''))
 source(paste(getwd(), "/age_fish.R", sep = ''))
-
+source(paste(getwd(), "/fitness.R", sep = ''))
 

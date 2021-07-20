@@ -2,22 +2,23 @@
 directory = paste(getwd(), "/Pink Salmon/model v.1/", sep = '')
 source(paste(directory, "source/FunctionSourcer.R", sep = ''))   #source functions and set source directory
 
-habitat <- SampleHabitat()
+habitat <- SampleHabitat(n = 11, disp.dist = 2)
+habitat <- within(habitat, c(river <- factor(river)))
 
 #Data structure to hold the habitat information
-habitat <- data.frame(river = c("Current", "Wolf", "Steel"), 
-                      pop.k = c(500, 500, 2000), 
-                      migr.curr = c(95,10,0), 
-                      migr.wolf = c(5,90,5), 
-                      migr.steel = c(0,5,95))
+#habitat <- data.frame(river = c("Current", "Wolf", "Steel"), 
+#                      size = c(500, 500, 2000), 
+#                      migr.curr = c(95,5,0), 
+#                      migr.wolf = c(5,90,5), 
+#                      migr.steel = c(0,5,95))
 #Alternatively, have the habitat variants be their own .csv file
 #habitat <- read.csv("filename.csv", header = TRUE)
 
 #set up the data frame for the lake population
 #start with some initial colonizing population (those first released into lake)
 pop.initial <- 100
-lake.salmon <- data.frame(matrix(NA, pop.initial, 12))
-colnames(lake.salmon) <- c("year", "fish.num", "sex", "mass", "age", "age.mat", "river", "mig.river","died", "num.f1", "mom.num", "dad.num")
+lake.salmon <- data.frame(matrix(NA, pop.initial, 13))
+colnames(lake.salmon) <- c("year", "fish.num", "sex", "mass", "age", "age.mat", "river", "mig.river","died", "num.f1", "mom.num", "dad.num", "ind.fitness")
 
 #what year were the fish released?
 lake.salmon$year <- rep(1950, nrow(lake.salmon))
@@ -42,21 +43,29 @@ lake.salmon$age <- rep(0,nrow(lake.salmon))
 lake.salmon$age.mat <- rep(2,nrow(lake.salmon))
 
 #river is spawning location for the released fish
-lake.salmon$river <- rep("Current",nrow(lake.salmon))
+#lake.salmon$river <- rep("Current",nrow(lake.salmon))
 #will need a line for handling factors to ensure that river is a factor 
 #with all possible rivers based on habitat
 #initial fish have not had the opportunity to migrate
-lake.salmon$mig.river <- rep("Current",nrow(lake.salmon))
+#lake.salmon$mig.river <- rep("Current",nrow(lake.salmon))
+
+#to use the randomly generated habitat
+lake.salmon$river <- rep(levels(habitat$river)[habitat$river[1]],nrow(lake.salmon))
+lake.salmon$mig.river <- rep(levels(habitat$river)[habitat$river[1]],nrow(lake.salmon))
+
 
 #died <---- column to record death 0 == alive, 1 == dead
 
 lake.salmon$died <- 0
 
+#an empty fitness column to be filled after the simulation
+lake.salmon$ind.fitness <- NA
+
 #initial fish have not had a breeding opportunity so leave num.f1 as 'NA'
 #similarly they are the original fish so we won't have info on their parents
 
 census <- NULL
-years <- c(1:10)
+years <- c(1:30)
 
 for (i in years){
   print(i)
@@ -80,3 +89,5 @@ for (i in years){
   lake.salmon <- mortality(lake.salmon)
 }
 
+#update census with fitness for each individual salmon
+census <- fitness(census, max(years))
