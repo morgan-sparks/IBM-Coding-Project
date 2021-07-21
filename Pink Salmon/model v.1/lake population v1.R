@@ -14,6 +14,9 @@ habitat <- within(habitat, c(river <- factor(river)))
 #Alternatively, have the habitat variants be their own .csv file
 #habitat <- read.csv("filename.csv", header = TRUE)
 
+### toggle switches for different modeling approaches
+fixed.maturity <- TRUE #when true fish only mature at 2, when false mature at 2 and 3
+
 #set up the data frame for the lake population
 #start with some initial colonizing population (those first released into lake)
 pop.initial <- 100
@@ -65,7 +68,7 @@ lake.salmon$ind.fitness <- NA
 #similarly they are the original fish so we won't have info on their parents
 
 census <- NULL
-years <- c(1:30)
+years <- c(1:100)
 
 for (i in years){
   print(i)

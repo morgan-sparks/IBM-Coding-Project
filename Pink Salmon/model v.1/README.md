@@ -43,7 +43,7 @@ Two Minnesota tributaries: Nicolette and Spangler 1986, Cascade River (N_hat = 1
 5. Density dependence (e.g., how many spawning spots available in a river, kill if > K)
 6. Pair up adults of different sexes to spawn
 
---somewhere in here we need to add fitness calculation
+-- [x] somewhere in here we need to add fitness calculation
 
 ## Data strucutre
 1. Lake --> one dataframe that doesn't maintain info from past gens
@@ -60,4 +60,15 @@ Two Minnesota tributaries: Nicolette and Spangler 1986, Cascade River (N_hat = 1
 - [x] will straying be a matrix with likelihoods built in?
 
 ## Questions for the group
- - [ ] How do we want to handle dead individuals (delete whent the die vs. add death column and then delete at end of year after appended to census dataframe)
+ - [ ] How do we want to handle dead individuals (delete when they die vs. add death column and then delete at end of year after appended to census dataframe)
+ 
+ ------------------------------------------------------------------------
+ 
+ ##Fitness phenotypes
+ 1. 2 yr old
+ 2. 3 yr old
+ 3. 2 yr no-stray
+ 4. 2 yr stray
+ 5. 3 yr no-stray
+ 6. 3 yr stray
+ 

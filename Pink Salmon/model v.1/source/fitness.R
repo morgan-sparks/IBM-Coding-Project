@@ -30,7 +30,7 @@ fitness <- function(census, sim.years){
         }
       } #end loop through parents
     } #end if statement checking whether there were parents found this year
+    print(y)
   } #end loop through years
-  
   return(census)
 } #end fitness function
