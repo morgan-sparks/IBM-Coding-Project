@@ -16,6 +16,6 @@ module purge
 module load gcc
 module load r
 
-R --no-save  < /scratch/bell/sparks35/IBM-Coding-Project/Pink_Salmon/model_v.1/lake_population_v1.R
+R --no-save  < /scratch/bell/sparks35/IBM-Coding-Project/Pink\ Salmon/model\ v.1/lake\ population\ v1.R
 
 module purge
