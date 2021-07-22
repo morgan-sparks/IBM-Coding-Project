@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=Pink Salmon IBM test
+#SBATCH --job-name=Pink_Salmon_IBM_test
 #SBATCH -A beagle
 #SBATCH -N 1
 #SBATCH -n 10
