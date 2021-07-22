@@ -8,8 +8,6 @@
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=sparks35@purdue.edu
 
-cd $SLURM_SUBMIT_DIR
-
 module unload openmpi
 module purge
 
