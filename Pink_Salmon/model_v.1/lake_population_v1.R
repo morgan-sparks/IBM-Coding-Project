@@ -2,7 +2,7 @@
 directory = paste(getwd(), "/Pink_Salmon/model_v.1/", sep = '')
 source(paste(directory, "source/FunctionSourcer.R", sep = ''))   #source functions and set source directory
 
-habitat <- SampleHabitat(n = 11, disp.dist = 2)
+habitat <- SampleHabitat(n = 51, disp.dist = 2)
 habitat <- within(habitat, c(river <- factor(river)))
 
 #Data structure to hold the habitat information
@@ -68,7 +68,7 @@ lake.salmon$ind.fitness <- NA
 #similarly they are the original fish so we won't have info on their parents
 
 census <- NULL
-years <- c(1:30)
+years <- c(1:100)
 
 for (i in years){
   print(i)
