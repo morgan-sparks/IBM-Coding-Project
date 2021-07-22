@@ -1,6 +1,6 @@
 fit_summ <- function(census, fixed.maturity){
   
-if(fixed_maturity == TRUE){
+if(fixed.maturity == TRUE){
   
   fitness_summary <- data.frame(matrix(NA, 0, 7))
   colnames(fitness_summary) <- c("year", "two_yrs_fit", "two_yrs_home_fit", "two_yrs_stray_fit", "two_yrs_RRS", "two_yrs_home_RRS", "two_yrs_stray_RRS")
