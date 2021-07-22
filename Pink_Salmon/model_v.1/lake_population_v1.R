@@ -68,7 +68,7 @@ lake.salmon$ind.fitness <- NA
 #similarly they are the original fish so we won't have info on their parents
 
 census <- NULL
-years <- c(1:100)
+years <- c(1:30)
 
 for (i in years){
   print(i)
@@ -99,4 +99,4 @@ census <- fitness(census, max(years))
 
 fitness_summary <- fit_summ(census, fixed.maturity)
 
-write(fitness_summary, paste(directory, "output/fitness_summary.csv", sep = '') )
+write.csv(fitness_summary, paste(directory, "output/fitness_summary.csv", sep = ''))
