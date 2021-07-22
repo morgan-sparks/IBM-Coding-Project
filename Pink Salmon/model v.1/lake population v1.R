@@ -94,3 +94,9 @@ for (i in years){
 
 #update census with fitness for each individual salmon
 census <- fitness(census, max(years))
+
+# fitness summary
+
+fitness_summary <- fit_summ(census, fixed.maturity)
+
+write(fitness_summary, paste(directory, "output/fitness_summary.csv", sep = '') )

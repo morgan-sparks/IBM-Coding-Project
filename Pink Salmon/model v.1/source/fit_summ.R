@@ -1,4 +1,4 @@
-fit_summ <- function(census, fixed_maturity){
+fit_summ <- function(census, fixed.maturity){
   
 if(fixed_maturity == TRUE){
   
@@ -7,7 +7,7 @@ if(fixed_maturity == TRUE){
   
   for(y in 2:length(census)){
     census_year <- census[[y]]
-    year <- census_year[nrow(census_year),1]
+    year <- y
     year_sum <- NULL
     ### select individuals on conditional statements and then sample and take the mean their ind.fitness column
     
