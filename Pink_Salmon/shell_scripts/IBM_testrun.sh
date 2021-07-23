@@ -4,7 +4,7 @@
 #SBATCH -N 1
 #SBATCH -n 10
 #SBATCH --mem=40G
-#SBATCH -t 200:00:00
+#SBATCH -t 24:00:00
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=sparks35@purdue.edu
 
