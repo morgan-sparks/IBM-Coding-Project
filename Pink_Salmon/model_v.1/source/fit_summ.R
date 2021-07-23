@@ -1,3 +1,7 @@
+###############
+#### NOTE ####
+#This function is only complete for 2 yr olds
+
 fit_summ <- function(census, fixed.maturity){
   
 if(fixed.maturity == TRUE){
@@ -5,7 +9,7 @@ if(fixed.maturity == TRUE){
   fitness_summary <- data.frame(matrix(NA, 0, 7))
   colnames(fitness_summary) <- c("year", "two_yrs_fit", "two_yrs_home_fit", "two_yrs_stray_fit", "two_yrs_RRS", "two_yrs_home_RRS", "two_yrs_stray_RRS")
   
-  for(y in 2:length(census)){
+  for(y in seq(from =2, to = length(census), by =2)){
     census_year <- census[[y]]
     year <- y
     year_sum <- NULL
