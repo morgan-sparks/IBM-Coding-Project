@@ -2,7 +2,15 @@
 directory = paste(getwd(), "/Pink_Salmon/model_v.1/", sep = '')
 source(paste(directory, "source/FunctionSourcer.R", sep = ''))   #source functions and set source directory
 
-habitat <- SampleHabitat(n = 51, disp.dist = 2)
+#### set number of iterations to run and object to store fitness_summary for each run
+
+runs <- 5
+iteration_summary <- NULL
+
+for (z in c(1:runs)){
+run <- z
+
+habitat <- SampleHabitat(n = 11, disp.dist = 2)
 habitat <- within(habitat, c(river <- factor(river)))
 
 #Data structure to hold the habitat information
@@ -68,7 +76,7 @@ lake.salmon$ind.fitness <- NA
 #similarly they are the original fish so we won't have info on their parents
 
 census <- NULL
-years <- c(1:200)
+years <- c(1:10)
 
 for (i in years){
   print(i)
@@ -97,6 +105,9 @@ census <- fitness(census, max(years))
 
 # fitness summary
 
-fitness_summary <- fit_summ(census, fixed.maturity)
+fitness_summary <- fit_summ(census, fixed.maturity, run)
 
-write.csv(fitness_summary, paste(directory, "output/fitness_summary.csv", sep = ''))
+#append fitness summary into iteration summary
+iteration_summary <- rbind(iteration_summary, fitness_summary) 
+}
+write.csv(iteration_summary, paste(directory, "output/iteration_summary.csv", sep = ''))
