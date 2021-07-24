@@ -8,9 +8,6 @@
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=sparks35@purdue.edu
 
-module unload openmpi
-module purge
-
 module load gcc
 module load r
 
