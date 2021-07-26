@@ -6,7 +6,7 @@ ggplot(iteration_summary) +
   geom_line(aes(x = year, y = two_yrs_home_RRS, group = run ,  color = "2yrs_home"), size =.5, alpha = 0.25) +
   stat_smooth(aes(x = year, y = two_yrs_home_RRS, color = "2yrs_home"),  geom = "line", fun.y="mean", size =1, alpha = 1) +
   geom_line(aes(x = year, y = two_yrs_stray_RRS, group = run, color = "2yrs_stray"), size =.5, alpha = 0.25) +
-  stat_smooth(aes(x = year, y = two_yrs_stray_RRS, color = "2yrs_stray"),  geom = "line", fun.y="mean", , size =1, alpha = 1) +
+  stat_smooth(aes(x = year, y = two_yrs_stray_RRS, color = "2yrs_stray"),  geom = "line", fun.y="mean", size =1, alpha = 1) +
   labs(x = "Year", y = "RRS", color = "Dispersal Phenotype") +
   scale_color_manual(values =c("2yrs" = "red", "2yrs_home" = "blue", "2yrs_stray" = "darkgreen" ),
                      labels = c("All 2-yr Olds", "Home Returning 2-yr olds", "Straying 2-yr olds")) +
