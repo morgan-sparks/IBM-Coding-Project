@@ -1,14 +1,31 @@
-SampleHabitat = function(n = 11, disp.dist = 1, disp.perc = 10, sizes = c(500,2000), size.distrib = c(0.7, 0.3)){
-  #Generate randomly sampled habitat structure
+SampleHabitat = function(n = 11, disp.dist = 1, disp.perc = 10, sizes = c(500,2000), pattern = 1, size.distrib = c(0.7, 0.3)){
+  #Generate habitat structure
   #Assume a ring structure so animals disperse evenly in either direction
+  #pattern is a toggle for different habitat structure generation
+  #1 random sampling according to the sizes and distribution given
+  #2 repeating pattern of small, small, big (500, 500, 2000)
+  #3 bigs all at the start, with the rest all small
+  #4 small all at the start, with big at the far side of the ring
+  #note that 2-4 will only work with 2 sizes, must be entered c(small, big) and distrib to match
   
   habitats.df <- data.frame(matrix(NA, nrow = n, ncol = n+2))
   
   habitats.df[,1] <- sprintf("River%i", c(1:n))
   colnames(habitats.df)[1] <- "river"
   
-  habitats.df[,2] <- sample(x = sizes, size = n, prob = size.distrib, replace = TRUE)
+  #fill the size column depending on the pattern selected
   colnames(habitats.df)[2] <- "size"
+  num.big <- floor(n*size.distrib[2])
+  patt.reps <- ceiling(n/3)
+  ifelse(pattern == 1,
+         habitats.df[,2] <- sample(x = sizes, size = n, prob = size.distrib, replace = TRUE),
+         ifelse(pattern == 2,
+                habitats.df[,2] <- c(rep(c(sizes[1],sizes[1],sizes[2]), ceiling(patt.reps/2))[c(1:ceiling(n/2))], rev(rep(c(sizes[1],sizes[1],sizes[2]), ceiling(patt.reps/2))[c(2:(n-ceiling(n/2)+1))])),
+                ifelse(pattern == 3,
+                       habitats.df[,2] <- c(rep(sizes[2],ceiling(num.big/2)), rep(sizes[1], n-num.big), rep(sizes[2],floor(num.big/2))),
+                       habitats.df[,2] <- c(rep(sizes[1], ceiling((n-num.big)/2)), rep(sizes[2], num.big), rep(sizes[1], floor((n-num.big)/2)))
+                )))
+  
   
   #create a function that calculates the series if
   #1) chance of dispersing left or right is equal (1/2 total dispersal percentage)
