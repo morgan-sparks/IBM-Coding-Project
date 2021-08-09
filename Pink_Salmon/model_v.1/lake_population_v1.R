@@ -4,13 +4,26 @@ source(paste(directory, "source/FunctionSourcer.R", sep = ''))   #source functio
 
 #### set number of iterations to run and object to store fitness_summary for each run
 
-runs <- 25
+runs <- 5
 iteration_summary <- NULL
+
+years <- c(1:30)
+habitat.occupancy <- data.frame(matrix(NA, runs*length(years), 7))
+colnames(habitat.occupancy) <- c("run", "year", "age.at.mat.evolve", "habitat.struct", "total.count", "habitat.K", "p.filled")
+
 
 for (z in c(1:runs)){
 run <- z
 
-habitat <- SampleHabitat(n = 51, disp.dist = 2)
+#To generate a random habitat
+#pattern is a toggle for different habitat structure generation
+#1 random sampling according to the sizes and distribution given
+#2 repeating pattern of small, small, big (500, 500, 2000)
+#3 bigs all at the start, with the rest all small
+#4 small all at the start, with big at the far side of the ring
+#note that 2-4 will only work with 2 sizes, must be entered c(small, big) and distrib to match
+habitat.gen.pattern <- 1
+habitat <- SampleHabitat(n = 51, disp.dist = 2, pattern = habitat.gen.pattern)
 habitat <- within(habitat, c(river <- factor(river)))
 
 #Data structure to hold the habitat information
@@ -76,10 +89,16 @@ lake.salmon$ind.fitness <- NA
 #similarly they are the original fish so we won't have info on their parents
 
 census <- NULL
-years <- c(1:100)
+print(sprintf("Run %i of %i, %i years long", run, runs, length(years)))
 
 for (i in years){
   print(i)
+  
+  #take a snapshot of how much of the total carrying capacity of the
+  #environment is currently occupied
+  #taking this snapshot at the start of the year means reproduction and
+  #density dependent mortality have not yet affected the population
+  habitat.occupancy[((run-1)*length(years)+i),] <- c(run, i, fixed.maturity, habitat.gen.pattern, nrow(lake.salmon), sum(habitat$size), nrow(lake.salmon)/sum(habitat$size))
   
   #####-----emigrate
   lake.salmon <- emigrate(lake.salmon, habitat)
@@ -111,3 +130,9 @@ fitness_summary <- fit_summ(census, fixed.maturity, run)
 iteration_summary <- rbind(iteration_summary, fitness_summary) 
 }
 write.csv(iteration_summary, paste(directory, "output/iteration_summary.csv", sep = ''))
+
+#lines below give a simple plot of how the habitat fills over time
+#library(ggplot2)
+#ggplot(habitat.occupancy, aes(x = year, y = p.filled, group = run, col = run)) +
+#  geom_line() +
+#  theme_classic()
