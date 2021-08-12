@@ -1,4 +1,7 @@
-reproduce <-  function(lake.salmon, habitat){
+reproduce <-  function(lake.salmon, habitat, maturity.toggle){
+  #Maturity is fixed at 2 year age at maturity if maturity.toggle == TRUE
+  #Maturity is variable between 2 and 3 year old age at maturity if toggle == FALSE
+  
   spawning_fish <- lake.salmon[which(lake.salmon$age.mat-lake.salmon$age == 0 & lake.salmon$died == 0),] #select only fish that will be in rivers and haven't died
   if(is.null(spawning_fish)== FALSE){
     new_babies <- NULL # set up a blank object to append babies in to
@@ -41,9 +44,10 @@ reproduce <-  function(lake.salmon, habitat){
               babies$mass <- rnorm(nrow(babies), mean = 3, sd = 0.5) # give mass
               babies$age <- 0 #age = 0
               ######----------------
-              ######----------------
-              babies$age.mat <- 2 # age at maturity = 0 (make to toggle for later)
-              ######----------------
+              ifelse(maturity.toggle == TRUE, 
+                     babies$age.mat <- 2,
+                     babies$age.mat <- sample(x = c(2,3), size = baby.num[n], replace = TRUE, prob = c(0.9,0.1))
+                     )
               ######----------------
               babies$river <- f.fish[n,]$mig.river # make home river the river where mom spawned
               babies$mig.river <- NA # to be populated later

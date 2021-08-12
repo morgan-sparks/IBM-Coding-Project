@@ -8,8 +8,8 @@ runs <- 5
 iteration_summary <- NULL
 
 years <- c(1:30)
-habitat.occupancy <- data.frame(matrix(NA, runs*length(years), 7))
-colnames(habitat.occupancy) <- c("run", "year", "age.at.mat.evolve", "habitat.struct", "total.count", "habitat.K", "p.filled")
+habitat.occupancy <- data.frame(matrix(NA, runs*length(years), 8))
+colnames(habitat.occupancy) <- c("run", "year", "fixed.maturity", "habitat.struct", "num.river.with.fish", "total.count", "habitat.K", "p.filled")
 
 
 for (z in c(1:runs)){
@@ -94,14 +94,15 @@ print(sprintf("Run %i of %i, %i years long", run, runs, length(years)))
 for (i in years){
   print(i)
   
+  #####-----emigrate
+  lake.salmon <- emigrate(lake.salmon, habitat)
+  
   #take a snapshot of how much of the total carrying capacity of the
   #environment is currently occupied
   #taking this snapshot at the start of the year means reproduction and
   #density dependent mortality have not yet affected the population
-  habitat.occupancy[((run-1)*length(years)+i),] <- c(run, i, fixed.maturity, habitat.gen.pattern, nrow(lake.salmon), sum(habitat$size), nrow(lake.salmon)/sum(habitat$size))
-  
-  #####-----emigrate
-  lake.salmon <- emigrate(lake.salmon, habitat)
+  habitat.occupancy[((run-1)*length(years)+i),] <- c(run, i, fixed.maturity, habitat.gen.pattern, length(unique(lake.salmon$mig.river[!is.na(lake.salmon$mig.river)])),
+                                                     nrow(lake.salmon), sum(habitat$size), nrow(lake.salmon)/sum(habitat$size))
   
   #####-----age_fish
   lake.salmon <- age_fish(lake.salmon)
@@ -110,7 +111,7 @@ for (i in years){
   lake.salmon <- density_dependence(lake.salmon, habitat)
   
   #####-----reproduction
-  lake.salmon <- reproduce(lake.salmon, habitat)
+  lake.salmon <- reproduce(lake.salmon, habitat, fixed.maturity)
   
   #keep track of every fish that were alive in this year
   census[[i]] <- lake.salmon
@@ -124,15 +125,19 @@ census <- fitness(census, max(years))
 
 # fitness summary
 
-fitness_summary <- fit_summ(census, fixed.maturity, run)
+#fitness_summary <- fit_summ(census, fixed.maturity, run)
 
 #append fitness summary into iteration summary
-iteration_summary <- rbind(iteration_summary, fitness_summary) 
+#iteration_summary <- rbind(iteration_summary, fitness_summary) 
 }
-write.csv(iteration_summary, paste(directory, "output/iteration_summary.csv", sep = ''))
+#write.csv(iteration_summary, paste(directory, "output/iteration_summary.csv", sep = ''))
 
 #lines below give a simple plot of how the habitat fills over time
-#library(ggplot2)
-#ggplot(habitat.occupancy, aes(x = year, y = p.filled, group = run, col = run)) +
-#  geom_line() +
-#  theme_classic()
+library(ggplot2)
+ggplot(habitat.occupancy, aes(x = year, y = p.filled, group = run, col = run)) +
+  geom_line() +
+  theme_classic()
+
+ggplot(habitat.occupancy, aes(x = year, y = num.river.with.fish, group = run, col = run)) +
+  geom_line() +
+  theme_classic()
