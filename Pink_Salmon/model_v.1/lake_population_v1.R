@@ -7,7 +7,7 @@ source(paste(directory, "source/FunctionSourcer.R", sep = ''))   #source functio
 runs <- 5
 iteration_summary <- NULL
 
-years <- c(1:30)
+years <- c(1:50)
 habitat.occupancy <- data.frame(matrix(NA, runs*length(years), 8))
 colnames(habitat.occupancy) <- c("run", "year", "fixed.maturity", "habitat.struct", "num.river.with.fish", "total.count", "habitat.K", "p.filled")
 
@@ -36,7 +36,7 @@ habitat <- within(habitat, c(river <- factor(river)))
 #habitat <- read.csv("filename.csv", header = TRUE)
 
 ### toggle switches for different modeling approaches
-fixed.maturity <- TRUE #when true fish only mature at 2, when false mature at 2 and 3
+fixed.maturity <- FALSE #when true fish only mature at 2, when false mature at 2 and 3
 
 #set up the data frame for the lake population
 #start with some initial colonizing population (those first released into lake)
@@ -125,10 +125,10 @@ census <- fitness(census, max(years))
 
 # fitness summary
 
-#fitness_summary <- fit_summ(census, fixed.maturity, run)
+fitness_summary <- fit_summ(census, fixed.maturity, run)
 
 #append fitness summary into iteration summary
-#iteration_summary <- rbind(iteration_summary, fitness_summary) 
+iteration_summary <- rbind(iteration_summary, fitness_summary) 
 }
 #write.csv(iteration_summary, paste(directory, "output/iteration_summary.csv", sep = ''))
 
