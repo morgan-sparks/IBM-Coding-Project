@@ -7,7 +7,7 @@ source(paste(directory, "source/FunctionSourcer.R", sep = ''))   #source functio
 runs <- 5
 iteration_summary <- NULL
 
-years <- c(1:50)
+years <- c(1:30)
 habitat.occupancy <- data.frame(matrix(NA, runs*length(years), 8))
 colnames(habitat.occupancy) <- c("run", "year", "fixed.maturity", "habitat.struct", "num.river.with.fish", "total.count", "habitat.K", "p.filled")
 
