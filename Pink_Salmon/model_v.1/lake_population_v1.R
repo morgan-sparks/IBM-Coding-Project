@@ -4,10 +4,10 @@ source(paste(directory, "source/FunctionSourcer.R", sep = ''))   #source functio
 
 #### set number of iterations to run and object to store fitness_summary for each run
 
-runs <- 5
+runs <- 100
 iteration_summary <- NULL
 
-years <- c(1:30)
+years <- c(1:103)
 habitat.occupancy <- data.frame(matrix(NA, runs*length(years), 8))
 colnames(habitat.occupancy) <- c("run", "year", "fixed.maturity", "habitat.struct", "num.river.with.fish", "total.count", "habitat.K", "p.filled")
 
