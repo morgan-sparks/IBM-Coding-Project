@@ -113,7 +113,7 @@ for (i in years){
   #####-----reproduction
   lake.salmon <- reproduce(lake.salmon, habitat, fixed.maturity)
   
-  #keep track of every fish that were alive in this year
+  #keep track of every fish that was alive in this year
   census[[i]] <- lake.salmon
   
   #####-----mortality
@@ -130,14 +130,10 @@ fitness_summary <- fit_summ(census, fixed.maturity, run)
 #append fitness summary into iteration summary
 iteration_summary <- rbind(iteration_summary, fitness_summary) 
 }
-#write.csv(iteration_summary, paste(directory, "output/iteration_summary.csv", sep = ''))
 
-#lines below give a simple plot of how the habitat fills over time
-library(ggplot2)
-ggplot(habitat.occupancy, aes(x = year, y = p.filled, group = run, col = run)) +
-  geom_line() +
-  theme_classic()
+### write out files 
+write.csv(iteration_summary, paste(directory, "output/iteration_summary.csv", sep = ''))
 
-ggplot(habitat.occupancy, aes(x = year, y = num.river.with.fish, group = run, col = run)) +
-  geom_line() +
-  theme_classic()
+write.csv(habitat.occupancy, paste(directory, "output/habitat_occupancy.csv", sep = ''))
+
+

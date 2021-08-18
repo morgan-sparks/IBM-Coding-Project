@@ -1,6 +1,6 @@
 iteration_summary <- read.csv("~/IBM-Coding-Project/Pink_Salmon/model_v.1/output/iteration_summary.csv")
 
-
+library(ggplot2)
 ggplot(iteration_summary) +
   stat_smooth(aes(x = year, y = two_yrs_RRS, group = run, color = "2yrs",),  geom = "line", fun.y="mean",  size =1, alpha = 1) +
   geom_line(aes(x = year, y = two_yrs_home_RRS, group = run ,  color = "2yrs_home"), size =.5, alpha = 0.25) +
