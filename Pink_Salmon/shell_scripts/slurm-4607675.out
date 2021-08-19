@@ -1,0 +1,33 @@
+
+R version 3.6.3 (2020-02-29) -- "Holding the Windsock"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> #Data structure to hold all fish currently in the lake population
+> directory = paste(getwd(), "/Pink_Salmon/model_v.1/", sep = '')
+> source(paste(directory, "source/FunctionSourcer.R", sep = ''))   #source functions and set source directory
+Error in file(filename, "r", encoding = encoding) : 
+  cannot open the connection
+Calls: source -> file
+In addition: Warning message:
+In file(filename, "r", encoding = encoding) :
+  cannot open file '/scratch/bell/sparks35/IBM-Coding-Project/Pink_Salmon/shell_scripts/Pink_Salmon/model_v.1/source/FunctionSourcer.R': No such file or directory
+Execution halted
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) xalt/1.1.2
