@@ -1,19 +1,20 @@
+library(ggplot2)
 iteration_summary <- read.csv("~/IBM-Coding-Project/Pink_Salmon/model_v.1/output/iteration_summary.csv")
 
 
 ggplot(iteration_summary) +
-  #--- 2 yrs
+  #--- runs
+  geom_line(aes(x = year, y = two_yrs_home_RRS, group = run ,  color = "2yrs_home"), size =.5, alpha = 0.1) +
+  geom_line(aes(x = year, y = three_yrs_RRS, group = run ,  color = "3yrs_home"), size =.5, alpha = 0.1) +
+  geom_line(aes(x = year, y = two_yrs_stray_RRS, group = run, color = "2yrs_stray"), size =.5, alpha = 0.1) +
+  geom_line(aes(x = year, y = three_yrs_home_RRS, group = run ,  color = "3yrs_home"), size =.5, alpha = 0.1) +
+  geom_line(aes(x = year, y = three_yrs_stray_RRS, group = run, color = "3yrs_stray"), size =.5, alpha = 0.1) +
+  #---average
   stat_smooth(aes(x = year, y = two_yrs_RRS, group = run, color = "2yrs",),  geom = "line", fun.y="mean",  size =1, alpha = 1) +
-  geom_line(aes(x = year, y = two_yrs_home_RRS, group = run ,  color = "2yrs_home"), size =.5, alpha = 0.25) +
   stat_smooth(aes(x = year, y = two_yrs_home_RRS, color = "2yrs_home"),  geom = "line", fun.y="mean", size =1, alpha = 1) +
-  geom_line(aes(x = year, y = two_yrs_stray_RRS, group = run, color = "2yrs_stray"), size =.5, alpha = 0.25) +
   stat_smooth(aes(x = year, y = two_yrs_stray_RRS, color = "2yrs_stray"),  geom = "line", fun.y="mean", size =1, alpha = 1) +
-  #---3yrs
-  geom_line(aes(x = year, y = three_yrs_RRS, group = run ,  color = "3yrs_home"), size =.5, alpha = 0.25) +
-  stat_smooth(aes(x = year, y = three_yrs_RRS, group = run, color = "3yrs",),  geom = "line", fun.y="mean",  size =1, alpha = 1) +
-  geom_line(aes(x = year, y = three_yrs_home_RRS, group = run ,  color = "3yrs_home"), size =.5, alpha = 0.25) +
+  stat_smooth(aes(x = year, y = three_yrs_RRS, color = "3yrs",),  geom = "line", fun.y="mean",  size =1, alpha = 1) +
   stat_smooth(aes(x = year, y = three_yrs_home_RRS, color = "3yrs_home"),  geom = "line", fun.y="mean", size =1, alpha = 1) +
-  geom_line(aes(x = year, y = three_yrs_stray_RRS, group = run, color = "3yrs_stray"), size =.5, alpha = 0.25) +
   stat_smooth(aes(x = year, y = three_yrs_stray_RRS, color = "3yrs_stray"),  geom = "line", fun.y="mean", size =1, alpha = 1) +
   labs(x = "Year", y = "RRS", color = "Dispersal Phenotype") +
   scale_color_manual(values =c("2yrs" = "darkgreen", "2yrs_home" = "darkgoldenrod3", "2yrs_stray" = "darkolivegreen3",
