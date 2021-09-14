@@ -36,7 +36,7 @@ habitat <- within(habitat, c(river <- factor(river)))
 #habitat <- read.csv("filename.csv", header = TRUE)
 
 ### toggle switches for different modeling approaches
-fixed.maturity <- FALSE #when true fish only mature at 2, when false mature at 2 and 3
+fixed.maturity <- TRUE #when true fish only mature at 2, when false mature at 2 and 3
 
 #set up the data frame for the lake population
 #start with some initial colonizing population (those first released into lake)
