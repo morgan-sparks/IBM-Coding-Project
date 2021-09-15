@@ -1,6 +1,6 @@
 fit_summ <- function(census, fixed.maturity, run){
   
-if(fixed.maturity == TRUE){ # apply funcrion for only 2 yr olds
+if(fixed.maturity == TRUE){ # apply function for only 2 yr olds
   
   fitness_summary <- data.frame(matrix(NA, 0, 8))
   colnames(fitness_summary) <- c("run", "year", 
@@ -36,7 +36,7 @@ if(fixed.maturity == TRUE){ # apply funcrion for only 2 yr olds
     
     fitness_summary <- rbind(fitness_summary, year_sum)
     }
-  }else # apply function for 2 and 3 yr olds
+  }else{ # apply function for 2 and 3 yr olds
     
   fitness_summary <- data.frame(matrix(NA, 0, 18))
   colnames(fitness_summary) <- c("run", "year", 
@@ -115,6 +115,7 @@ if(fixed.maturity == TRUE){ # apply funcrion for only 2 yr olds
                      odd_yr_RRS, even_yr_RRS)
     
     fitness_summary <- rbind(fitness_summary, year_sum)
+    }
   }
 return(fitness_summary)
 }
