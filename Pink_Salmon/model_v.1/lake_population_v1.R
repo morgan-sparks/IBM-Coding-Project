@@ -22,7 +22,7 @@ run <- z
 #3 bigs all at the start, with the rest all small
 #4 small all at the start, with big at the far side of the ring
 #note that 2-4 will only work with 2 sizes, must be entered c(small, big) and distrib to match
-habitat.gen.pattern <- 1
+habitat.gen.pattern <- 3
 habitat <- SampleHabitat(n = 51, disp.dist = 2, pattern = habitat.gen.pattern)
 habitat <- within(habitat, c(river <- factor(river)))
 
@@ -36,7 +36,7 @@ habitat <- within(habitat, c(river <- factor(river)))
 #habitat <- read.csv("filename.csv", header = TRUE)
 
 ### toggle switches for different modeling approaches
-fixed.maturity <- TRUE #when true fish only mature at 2, when false mature at 2 and 3
+fixed.maturity <- FALSE #when true fish only mature at 2, when false mature at 2 and 3
 
 #set up the data frame for the lake population
 #start with some initial colonizing population (those first released into lake)
