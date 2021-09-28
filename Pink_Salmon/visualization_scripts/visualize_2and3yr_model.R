@@ -22,5 +22,5 @@ ggplot(iteration_summary) +
                      labels = c("All 2-yr Olds", "Home Returning 2-yr olds", "Straying 2-yr olds",
                                 "All 3-yr Olds", "Home Returning 3-yr olds", "Straying 3-yr olds")) +
   #lims(y = c(.6,1.2)) +
-  theme_classic(base_size = 16) 
+  theme_classic(base_size = 20) 
   #theme(legend.position = c(0.75, 0.3))
