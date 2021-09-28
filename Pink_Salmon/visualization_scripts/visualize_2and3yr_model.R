@@ -1,5 +1,5 @@
 library(ggplot2)
-iteration_summary <- read.csv("~/IBM-Coding-Project/Pink_Salmon/model_v.1/output/iteration_summary.csv")
+iteration_summary <- read.csv("~/IBM-Coding-Project/Pink_Salmon/past_runs/091421_randhab_2and3_iteration_summary.csv")
 
 
 ggplot(iteration_summary) +
@@ -22,5 +22,5 @@ ggplot(iteration_summary) +
                      labels = c("All 2-yr Olds", "Home Returning 2-yr olds", "Straying 2-yr olds",
                                 "All 3-yr Olds", "Home Returning 3-yr olds", "Straying 3-yr olds")) +
   #lims(y = c(.6,1.2)) +
-  theme_classic() 
+  theme_classic(base_size = 16) 
   #theme(legend.position = c(0.75, 0.3))
