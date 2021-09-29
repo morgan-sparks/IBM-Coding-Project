@@ -1,5 +1,5 @@
 library(ggplot2)
-iteration_summary <- read.csv("~/IBM-Coding-Project/Pink_Salmon/past_runs/091421_randhab_2and3_iteration_summary.csv")
+iteration_summary <- read.csv("~/IBM-Coding-Project/Pink_Salmon/past_runs/092921_bigtosmall_2and3_iteration_summary.csv")
 
 
 ggplot(iteration_summary) +
