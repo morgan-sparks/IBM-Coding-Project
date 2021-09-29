@@ -1,14 +1,17 @@
 #lines below give a simple plot of how the habitat fills over time
-
-habitat.occupancy <- read.csv("~/IBM-Coding-Project/Pink_Salmon/model_v.1/output/habitat_occupancy.csv")
-
 library(ggplot2); library(patchwork)
+
+habitat.occupancy <- read.csv("~/IBM-Coding-Project/Pink_Salmon/past_runs/091621_randhab_2_habitat_occupancy.csv")
+
 p.filled <- ggplot(habitat.occupancy, aes(x = year, y = p.filled, group = run, col = run)) +
   geom_line() +
-  theme_classic() 
+  ylab(label = "Proportion Filled") +
+  theme_classic(base_size = 16) 
 
 num_rivs <- ggplot(habitat.occupancy, aes(x = year, y = num.river.with.fish, group = run, col = run)) +
   geom_line() +
-  theme_classic()
+  ylab(label = "Number of Rivers with Spawners") +
+  theme_classic(base_size = 16)
 
-p.filled + num_rivs
+p.filled
+p.filled / num_rivs
