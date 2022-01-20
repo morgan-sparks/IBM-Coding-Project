@@ -76,7 +76,7 @@ lake.salmon$ind.fitness <- NA
 #similarly they are the original fish so we won't have info on their parents
 
 census <- NULL
-print(sprintf("Run %i of %i, %i years long", run, runs, length(years)))
+
 
 for (i in years){
   print(i)
@@ -88,7 +88,7 @@ for (i in years){
   #environment is currently occupied
   #taking this snapshot at the start of the year means reproduction and
   #density dependent mortality have not yet affected the population
-  habitat.occupancy[(length(years)+i),] <- c(i, fixed.maturity, habitat.gen.pattern, length(unique(lake.salmon$mig.river[!is.na(lake.salmon$mig.river)])),
+  habitat.occupancy[(i),] <- c(i, fixed.maturity, habitat.gen.pattern, length(unique(lake.salmon$mig.river[!is.na(lake.salmon$mig.river)])),
                                                      nrow(lake.salmon), sum(habitat$size), nrow(lake.salmon)/sum(habitat$size))
   
   #####-----age_fish
@@ -110,6 +110,7 @@ for (i in years){
 #update census with fitness for each individual salmon
 census <- fitness(census, max(years))
 
+#-----------############# append summary files with parameter info
 # fitness summary
 
 fitness_summary <- fit_summ(census, fixed.maturity)
@@ -124,8 +125,8 @@ habitat.occupancy <- cbind(habitat = rep(habitat.gen.pattern, times = nrow(habit
                          habitat.occupancy)
 
 ### write out files 
-# write.csv(iteration_summary, paste(directory, "output/iteration_summary.csv", sep = ''))
-# 
-# write.csv(habitat.occupancy, paste(directory, "output/habitat_occupancy.csv", sep = ''))
+write.csv(fitness_summary, paste(directory, "output/iteration_summary.csv", sep = ''))
+
+write.csv(habitat.occupancy, paste(directory, "output/habitat_occupancy.csv", sep = ''))
 
 
