@@ -1,9 +1,9 @@
-fit_summ <- function(census, fixed.maturity, run){
+fit_summ <- function(census, fixed.maturity){
   
 if(fixed.maturity == TRUE){ # apply function for only 2 yr olds
   
-  fitness_summary <- data.frame(matrix(NA, 0, 8))
-  colnames(fitness_summary) <- c("run", "year", 
+  fitness_summary <- data.frame(matrix(NA, 0, 7))
+  colnames(fitness_summary) <- c("year", 
                                  "two_yrs_fit", "two_yrs_home_fit", "two_yrs_stray_fit", 
                                  "two_yrs_RRS", "two_yrs_home_RRS", "two_yrs_stray_RRS")
   
@@ -32,14 +32,14 @@ if(fixed.maturity == TRUE){ # apply function for only 2 yr olds
     two_yrs_stray_RRS <-  two_yrs_stray_fit/two_yrs_fit # make fitness relative to 2 yr olds as a group
     
     
-    year_sum <-cbind(run, year,two_yrs_fit, two_yrs_home_fit, two_yrs_stray_fit, two_yrs_RRS, two_yrs_home_RRS, two_yrs_stray_RRS )
+    year_sum <-cbind(year,two_yrs_fit, two_yrs_home_fit, two_yrs_stray_fit, two_yrs_RRS, two_yrs_home_RRS, two_yrs_stray_RRS )
     
     fitness_summary <- rbind(fitness_summary, year_sum)
     }
   }else{ # apply function for 2 and 3 yr olds
     
-  fitness_summary <- data.frame(matrix(NA, 0, 18))
-  colnames(fitness_summary) <- c("run", "year", 
+  fitness_summary <- data.frame(matrix(NA, 0, 17))
+  colnames(fitness_summary) <- c("year", 
                                  "two_yrs_fit", "two_yrs_home_fit", "two_yrs_stray_fit", 
                                  "two_yrs_RRS", "two_yrs_home_RRS", "two_yrs_stray_RRS",
                                  "three_yrs_fit", "three_yrs_home_fit", "three_yrs_stray_fit", 
@@ -106,7 +106,7 @@ if(fixed.maturity == TRUE){ # apply function for only 2 yr olds
     
     
     
-    year_sum <-cbind(run, year,
+    year_sum <-cbind(year,
                      two_yrs_fit, two_yrs_home_fit, two_yrs_stray_fit, 
                      two_yrs_RRS, two_yrs_home_RRS, two_yrs_stray_RRS,
                      three_yrs_fit, three_yrs_home_fit, three_yrs_stray_fit, 

@@ -1,19 +1,13 @@
 #Data structure to hold all fish currently in the lake population
-directory = paste(getwd(), "/Pink_Salmon/model_v.1/", sep = '')
+directory = paste(getwd(), "/Pink_Salmon/model_v.2/", sep = '')
 source(paste(directory, "source/FunctionSourcer.R", sep = ''))   #source functions and set source directory
 
 #### set number of iterations to run and object to store fitness_summary for each run
 
-runs <- 100
-iteration_summary <- NULL
+years <- c(1:10)
+habitat.occupancy <- data.frame(matrix(NA, length(years), 7))
+colnames(habitat.occupancy) <- c("year", "fixed.maturity", "habitat.struct", "num.river.with.fish", "total.count", "habitat.K", "p.filled")
 
-years <- c(1:103)
-habitat.occupancy <- data.frame(matrix(NA, runs*length(years), 8))
-colnames(habitat.occupancy) <- c("run", "year", "fixed.maturity", "habitat.struct", "num.river.with.fish", "total.count", "habitat.K", "p.filled")
-
-
-for (z in c(1:runs)){
-run <- z
 
 #To generate a random habitat
 #pattern is a toggle for different habitat structure generation
@@ -101,7 +95,7 @@ for (i in years){
   #environment is currently occupied
   #taking this snapshot at the start of the year means reproduction and
   #density dependent mortality have not yet affected the population
-  habitat.occupancy[((run-1)*length(years)+i),] <- c(run, i, fixed.maturity, habitat.gen.pattern, length(unique(lake.salmon$mig.river[!is.na(lake.salmon$mig.river)])),
+  habitat.occupancy[(length(years)+i),] <- c(i, fixed.maturity, habitat.gen.pattern, length(unique(lake.salmon$mig.river[!is.na(lake.salmon$mig.river)])),
                                                      nrow(lake.salmon), sum(habitat$size), nrow(lake.salmon)/sum(habitat$size))
   
   #####-----age_fish
@@ -125,15 +119,20 @@ census <- fitness(census, max(years))
 
 # fitness summary
 
-fitness_summary <- fit_summ(census, fixed.maturity, run)
+fitness_summary <- fit_summ(census, fixed.maturity)
 
-#append fitness summary into iteration summary
-iteration_summary <- rbind(iteration_summary, fitness_summary) 
-}
+fitness_summary <- cbind(habitat = rep(habitat.gen.pattern, times = nrow(fitness_summary)),
+                         fixed_maturity = rep(fixed.maturity, times = nrow(fitness_summary)),
+                         fitness_summary)
+
+# habitat occupancy 
+habitat.occupancy <- cbind(habitat = rep(habitat.gen.pattern, times = nrow(habitat.occupancy)),
+                         fixed_maturity = rep(fixed.maturity, times = nrow(habitat.occupancy)),
+                         habitat.occupancy)
 
 ### write out files 
-write.csv(iteration_summary, paste(directory, "output/iteration_summary.csv", sep = ''))
-
-write.csv(habitat.occupancy, paste(directory, "output/habitat_occupancy.csv", sep = ''))
+# write.csv(iteration_summary, paste(directory, "output/iteration_summary.csv", sep = ''))
+# 
+# write.csv(habitat.occupancy, paste(directory, "output/habitat_occupancy.csv", sep = ''))
 
 
