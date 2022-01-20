@@ -12,22 +12,15 @@ colnames(habitat.occupancy) <- c("year", "fixed.maturity", "habitat.struct", "nu
 #To generate a random habitat
 #pattern is a toggle for different habitat structure generation
 #1 random sampling according to the sizes and distribution given
-#2 repeating pattern of small, small, big (500, 500, 2000)
-#3 bigs all at the start, with the rest all small
-#4 small all at the start, with big at the far side of the ring
-#note that 2-4 will only work with 2 sizes, must be entered c(small, big) and distrib to match
+#2 repeating pattern of small, small, big (500, 500, 1000, 2000, 1000, 500, 500)
+#3 bigs all at the start, meds intermediate, with the rest all small
+#4 small all at the start, meds intermediate, with big at the far side of the ring
+#SampleHabitat3() set up to work with patterns for three different habitat sizes
+#can change the sizes of the three habitats using argument sizes (default is: c(500, 1000, 2000))
+#can change relative numbers of each habitat using size.distrib (default is: c((4/7),(2/7),(1/7)))
 habitat.gen.pattern <- 3
-habitat <- SampleHabitat(n = 51, disp.dist = 2, pattern = habitat.gen.pattern)
+habitat <- SampleHabitat3(n = 51, disp.dist = 2, pattern = habitat.gen.pattern)
 habitat <- within(habitat, c(river <- factor(river)))
-
-#Data structure to hold the habitat information
-#habitat <- data.frame(river = c("Current", "Wolf", "Steel"), 
-#                      size = c(500, 500, 2000), 
-#                      migr.curr = c(95,5,0), 
-#                      migr.wolf = c(5,90,5), 
-#                      migr.steel = c(0,5,95))
-#Alternatively, have the habitat variants be their own .csv file
-#habitat <- read.csv("filename.csv", header = TRUE)
 
 ### toggle switches for different modeling approaches
 fixed.maturity <- FALSE #when true fish only mature at 2, when false mature at 2 and 3

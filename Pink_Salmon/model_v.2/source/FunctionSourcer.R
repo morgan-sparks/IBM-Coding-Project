@@ -6,6 +6,7 @@ setwd(paste(directory,"/source/", sep = ''))    # set temp working directory
 
 #source functions
 source(paste(getwd(), "/SampleHabitat.R", sep = ''))
+source(paste(getwd(), "/SampleHabitat3.R", sep = ''))
 source(paste(getwd(), "/reproduction.R", sep = ''))
 source(paste(getwd(), "/density_dependence.R", sep = ''))
 source(paste(getwd(), "/emigrate.R", sep = ''))
